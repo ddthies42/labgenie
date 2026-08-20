@@ -189,27 +189,10 @@
               </div>
             </div>
 
-            <div style="background:#fff;border-radius:20px;border:1px solid #DAE0EE;padding:32px">
-              <p style="font-family:Figtree,sans-serif;font-size:28px;font-weight:700;color:#25282A">Questions to Ask Your Care Team</p>
-              <div style="margin-top:24px;display:flex;flex-direction:column;gap:8px">
-                <sc-for list="{{ questions }}" as="q" hint-placeholder-count="3">
-                  <div style="{{ q.rowStyle }}" style-hover="{{ q.rowHover }}">
-                    <span style="flex:1;font-size:15px;font-weight:500;color:#25282A;line-height:22px">{{ q.text }}</span>
-                    <button onClick="{{ q.toggle }}" style="background:none;border:none;cursor:pointer;flex-shrink:0;display:flex" style-hover="opacity:0.7">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="{{ q.bmFill }}" stroke="var(--accent,#016ab3)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
-                    </button>
-                  </div>
-                </sc-for>
-              </div>
-              <div style="display:flex;justify-content:flex-end;margin-top:16px">
-                <button style="display:flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font-size:14px;font-weight:700;color:var(--accent,#016ab3)" style-hover="opacity:0.7">Get more questions to ask →</button>
-              </div>
-            </div>
-
           </div>
         </div>
         <div style="flex-shrink:0;width:380px;border-left:1px solid #E5EAF0;background:#fff;position:relative;z-index:1">
-          <dc-import name="LabGenieChat" chips="{{ dashChips }}" greeting="{{ dashGreeting }}" hint="{{ dashHint }}" hint-size="100%,100%"></dc-import>
+          <dc-import name="LabGenieChat" chips="{{ dashChips }}" questions="{{ questions }}" greeting="{{ dashGreeting }}" hint="{{ dashHint }}" hint-size="100%,100%"></dc-import>
         </div>
       </div>
     </sc-if>
@@ -890,10 +873,11 @@ class Component extends DCLogic {
         worse,
       ] },
       { text: 'When should I call my care team before my next appointment?', response: "If anything feels noticeably worse before your scheduled visit — a lot more swelling, feeling very short of breath, nausea that won't go away, or feeling unusually confused — it's worth reaching out to your care team.", showRelatedLabel: false, followups: [reach] },
-      { text: 'How can I prepare for my visit?', response: 'Going in with a sense of what you want to ask makes the time you have with your care team more useful for both of you. The main panel already has a few questions ready to bring.', showRelatedLabel: false, followups: [
-        { text: 'What if I forget what to ask?', response: 'Writing down or printing out your questions before the visit is one of the most straightforward ways to make sure nothing slips your mind in the moment.', handoff: 'The questions in the panel are ready for you to save and bring with you.' },
+      { text: 'How can I prepare for my visit?', response: 'Going in with a sense of what you want to ask makes the time you have with your care team more useful for both of you. Ask me for questions to bring and you can save the ones that matter to you.', showRelatedLabel: false, followups: [
+        { text: 'What if I forget what to ask?', response: 'Writing down or printing out your questions before the visit is one of the most straightforward ways to make sure nothing slips your mind in the moment.', handoff: 'Anything you bookmark here shows up in your visit prep, ready to bring with you.' },
         reach,
       ] },
+      { text: 'What questions should I ask my care team?', kind: 'questions', response: 'Here are a few questions worth raising at your next visit, based on these results. Save any that feel useful and they will be waiting in your visit prep.', showRelatedLabel: false },
     ];
   }
 
