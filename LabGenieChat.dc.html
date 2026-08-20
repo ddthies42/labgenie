@@ -63,6 +63,13 @@
             </div>
           </sc-for>
         </div>
+        <sc-if value="{{ savedAny }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:14px;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:#EBF5FA;border:1px solid #B8DBF0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--accent,#016ab3)" stroke="var(--accent,#016ab3)" stroke-width="1.5" style="flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+            <span style="flex:1;font-size:14px;font-weight:600;color:#25282A">{{ savedLabel }}</span>
+            <button onClick="{{ onViewPrep }}" style="background:none;border:none;padding:0;cursor:pointer;font-size:14px;font-weight:700;color:var(--accent,#016ab3);white-space:nowrap" style-hover="opacity:0.7">View prep list →</button>
+          </div>
+        </sc-if>
       </sc-if>
 
       <sc-if value="{{ modeChip }}" hint-placeholder-val="{{ false }}">
@@ -90,7 +97,7 @@
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:380,&quot;height&quot;:560},&quot;chips&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[{&quot;text&quot;:&quot;Can you help me understand my results?&quot;,&quot;response&quot;:&quot;Which results would you like me to explain?&quot;,&quot;showRelatedLabel&quot;:true,&quot;followups&quot;:[{&quot;text&quot;:&quot;TSH&quot;,&quot;response&quot;:&quot;Your TSH result of 7.0 mIU/L is higher than the normal range.&quot;,&quot;handoff&quot;:&quot;Your care team will be able to go into more detail at your next visit.&quot;}]}],&quot;tsType&quot;:&quot;any[]&quot;},&quot;questions&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[],&quot;tsType&quot;:&quot;any[]&quot;},&quot;greeting&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;hint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;closeable&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;onClose&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:380,&quot;height&quot;:560},&quot;chips&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[{&quot;text&quot;:&quot;Can you help me understand my results?&quot;,&quot;response&quot;:&quot;Which results would you like me to explain?&quot;,&quot;showRelatedLabel&quot;:true,&quot;followups&quot;:[{&quot;text&quot;:&quot;TSH&quot;,&quot;response&quot;:&quot;Your TSH result of 7.0 mIU/L is higher than the normal range.&quot;,&quot;handoff&quot;:&quot;Your care team will be able to go into more detail at your next visit.&quot;}]}],&quot;tsType&quot;:&quot;any[]&quot;},&quot;questions&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[],&quot;tsType&quot;:&quot;any[]&quot;},&quot;onViewPrep&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;greeting&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;hint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;closeable&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;onClose&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;}}">
 class Component extends DCLogic {
   state = { mode: 'default', chipIdx: 0, followupIdx: 0 };
 
@@ -102,6 +109,7 @@ class Component extends DCLogic {
     const activeFollowup =
       mode === 'followup' && activeChip ? (activeChip.followups || [])[followupIdx] : null;
 
+    const savedQCount = (this.props.questions || []).filter((q) => q && q.saved).length;
     return {
       greeting: this.props.greeting || "Hi, Sam. I'm LabGenie, your lab results companion. How can I help you today?",
       hint: this.props.hint || 'Select a topic above to learn more about your results.',
@@ -117,6 +125,9 @@ class Component extends DCLogic {
       modeChip: mode === 'chip' && !(activeChip && activeChip.kind === 'questions'),
       modeQuestions: mode === 'chip' && !!activeChip && activeChip.kind === 'questions',
       questionRows: this.props.questions || [],
+      savedAny: savedQCount > 0,
+      savedLabel: savedQCount === 1 ? '1 question saved to your prep list' : savedQCount + ' questions saved to your prep list',
+      onViewPrep: this.props.onViewPrep,
       showRelatedLabel: activeChip ? !!activeChip.showRelatedLabel : false,
       followupButtons:
         mode === 'chip' && activeChip

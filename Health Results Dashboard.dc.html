@@ -192,7 +192,7 @@
           </div>
         </div>
         <div style="flex-shrink:0;width:380px;border-left:1px solid #E5EAF0;background:#fff;position:relative;z-index:1">
-          <dc-import name="LabGenieChat" chips="{{ dashChips }}" questions="{{ questions }}" greeting="{{ dashGreeting }}" hint="{{ dashHint }}" hint-size="100%,100%"></dc-import>
+          <dc-import name="LabGenieChat" chips="{{ dashChips }}" questions="{{ questions }}" on-view-prep="{{ goPrep }}" greeting="{{ dashGreeting }}" hint="{{ dashHint }}" hint-size="100%,100%"></dc-import>
         </div>
       </div>
     </sc-if>
@@ -420,7 +420,7 @@
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px">
               <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="1.5" style="margin-bottom:24px"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
               <h2 style="font-family:Figtree,sans-serif;font-size:24px;font-weight:700;color:#25282A;margin:0 0 12px">Nothing saved yet</h2>
-              <p style="font-size:16px;font-weight:500;color:#6B7280;line-height:24px;max-width:400px;text-align:center;margin:0 0 32px">Tap the bookmark icon on any question or next step on your dashboard to save it here.</p>
+              <p style="font-size:16px;font-weight:500;color:#6B7280;line-height:24px;max-width:400px;text-align:center;margin:0 0 32px">Tap the bookmark icon on a next step on your dashboard, or on a question in the LabGenie chat, to save it here.</p>
               <button onClick="{{ goDashboard }}" style="padding:12px 24px;border-radius:8px;border:2px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-size:16px;font-weight:600;color:var(--accent,#016ab3)" style-hover="background:#f9fafb">Go to your dashboard →</button>
             </div>
           </sc-if>
@@ -446,7 +446,7 @@
                         </button>
                         <div style="flex:1;min-width:0">
                           <p style="font-size:16px;font-weight:500;color:#25282A;line-height:24px;margin:0">{{ item.text }}</p>
-                          <p style="margin:4px 0 0;font-size:12px;font-weight:500;color:#9CA3AF">From: Dashboard · May 28, 2026</p>
+                          <p style="margin:4px 0 0;font-size:12px;font-weight:500;color:#9CA3AF">{{ item.source }}</p>
                         </div>
                         <button onClick="{{ item.remove }}" style="flex-shrink:0;padding:4px;border-radius:4px;background:none;border:none;cursor:pointer;margin-top:2px" style-hover="background:#f3f4f6">
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4L12 12" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"></path></svg>
@@ -475,7 +475,7 @@
                         </div>
                         <div style="flex:1;min-width:0">
                           <p style="font-size:16px;font-weight:500;color:#25282A;line-height:24px;margin:0">{{ item.text }}</p>
-                          <p style="margin:4px 0 0;font-size:12px;font-weight:500;color:#9CA3AF">From: Dashboard · May 28, 2026</p>
+                          <p style="margin:4px 0 0;font-size:12px;font-weight:500;color:#9CA3AF">{{ item.source }}</p>
                         </div>
                         <button onClick="{{ item.remove }}" style="flex-shrink:0;padding:4px;border-radius:4px;background:none;border:none;cursor:pointer;margin-top:2px" style-hover="background:#f3f4f6">
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4L12 12" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"></path></svg>
@@ -1090,7 +1090,7 @@ class Component extends DCLogic {
       const idx = i;
       const checked = !!this.state.checkedQ[idx];
       prepQuestions.push({
-        text: this.QUESTIONS[idx], checked,
+        text: this.QUESTIONS[idx], checked, source: 'From: LabGenie chat · May 28, 2026',
         wrapStyle: prepQuestions.length > 0 ? { borderTop: '1px solid #E5EAF0' } : {},
         checkStyle: checkBox(checked),
         toggleCheck: () => this.setState((s) => ({ checkedQ: { ...s.checkedQ, [idx]: !s.checkedQ[idx] } })),
@@ -1103,7 +1103,7 @@ class Component extends DCLogic {
       const idx = i;
       const checked = !!this.state.checkedSteps[idx];
       prepSteps.push({
-        text: this.NEXT_STEPS_SHORT[idx], checked, num: prepSteps.length + 1,
+        text: this.NEXT_STEPS_SHORT[idx], checked, num: prepSteps.length + 1, source: 'From: Dashboard · May 28, 2026',
         wrapStyle: prepSteps.length > 0 ? { borderTop: '1px solid #E5EAF0' } : {},
         checkStyle: checkBox(checked),
         toggleCheck: () => this.setState((s) => ({ checkedSteps: { ...s.checkedSteps, [idx]: !s.checkedSteps[idx] } })),
