@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:100%;user-select:none;font-family:Inter,sans-serif;font-size:{{ rootFontSize }}">
+  <!-- Indicator: Your Result + value + triangle -->
+  <div style="position:relative;height:3.4em">
+    <div style="position:absolute;bottom:0;display:flex;flex-direction:column;align-items:center;gap:2px;transform:translateX(-50%);left:{{ markerLeft }}">
+      <span style="white-space:nowrap;font-size:0.7em;font-weight:500;color:#000;line-height:1.3">Your Result:</span>
+      <span style="white-space:nowrap;font-size:1em;font-weight:800;color:#000;line-height:1.2">{{ value }}</span>
+      <div style="margin-top:0.2em;line-height:0">
+        <svg viewBox="0 0 24 24.4353" fill="none" style="display:block;width:1em;height:1em">
+          <path d="M12.9219 23.4033C12.512 24.1127 11.488 24.1127 11.0781 23.4033L1.66406 7.09667C1.25436 6.38691 1.76639 5.49999 2.58594 5.49999L21.4141 5.49999C22.2336 5.49999 22.7456 6.38691 22.3359 7.09667L12.9219 23.4033Z" fill="#3E424F" stroke="#FBFBFB" stroke-width="0.8"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pill bar -->
+  <div style="display:flex;width:100%;height:1.3em;border-radius:100px;overflow:hidden">
+    <sc-for list="{{ segs }}" as="seg" hint-placeholder-count="3">
+      <div style="height:100%;flex-shrink:0;width:{{ seg.widthCss }};background:{{ seg.color }};border-right:{{ seg.border }}"></div>
+    </sc-for>
+  </div>
+
+  <!-- Labels -->
+  <div style="margin-top:0.35em">
+    <div style="display:flex;width:100%;height:1.1em">
+      <sc-for list="{{ segs }}" as="seg" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;width:{{ seg.widthCss }}">
+          <span style="text-align:center;font-size:0.75em;font-weight:600;color:#000;line-height:1.2;white-space:nowrap">{{ seg.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="position:relative;width:100%;height:1em;margin-top:0.15em">
+      <sc-for list="{{ thresholds }}" as="t" hint-placeholder-count="2">
+        <span style="position:absolute;top:0;text-align:center;transform:translateX(-50%);font-size:0.7em;font-weight:500;color:#000;line-height:1.2;white-space:nowrap;left:{{ t.leftCss }}">{{ t.value }}</span>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:620,&quot;height&quot;:150},&quot;value&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;7.0 mIU/L&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;segments&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[{&quot;label&quot;:&quot;Low&quot;,&quot;color&quot;:&quot;#CA313F&quot;,&quot;widthPct&quot;:12,&quot;endValue&quot;:&quot;0.4&quot;},{&quot;label&quot;:&quot;Normal&quot;,&quot;color&quot;:&quot;#4B9C2F&quot;,&quot;widthPct&quot;:48,&quot;endValue&quot;:&quot;4.5&quot;},{&quot;label&quot;:&quot;High&quot;,&quot;color&quot;:&quot;#F7DE6F&quot;,&quot;widthPct&quot;:25,&quot;endValue&quot;:&quot;10&quot;},{&quot;label&quot;:&quot;Very High&quot;,&quot;color&quot;:&quot;#CA313F&quot;,&quot;widthPct&quot;:15}],&quot;tsType&quot;:&quot;{label:string;color:string;widthPct:number;endValue?:string}[]&quot;},&quot;markerPct&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:58,&quot;min&quot;:0,&quot;max&quot;:100,&quot;tsType&quot;:&quot;number&quot;},&quot;large&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const DEFAULT_SEGMENTS = [
+      { label: 'Low', color: '#CA313F', widthPct: 12, endValue: '0.4' },
+      { label: 'Normal', color: '#4B9C2F', widthPct: 48, endValue: '4.5' },
+      { label: 'High', color: '#F7DE6F', widthPct: 25, endValue: '10' },
+      { label: 'Very High', color: '#CA313F', widthPct: 15 },
+    ];
+    const segments = (this.props.segments && this.props.segments.length) ? this.props.segments : DEFAULT_SEGMENTS;
+    const markerPct = this.props.markerPct ?? 58;
+    const n = segments.length;
+    const segs = segments.map((s, i) => ({
+      label: s.label,
+      color: s.color,
+      widthCss: s.widthPct + '%',
+      border: i < n - 1 ? '1.5px solid white' : 'none',
+    }));
+    let cum = 0;
+    const thresholds = [];
+    segments.forEach((s) => {
+      cum += s.widthPct;
+      if (s.endValue) thresholds.push({ value: s.endValue, leftCss: cum + '%' });
+    });
+    const clamped = Math.min(Math.max(markerPct, 4), 96);
+    return {
+      value: this.props.value || '7.0 mIU/L',
+      segs,
+      thresholds,
+      markerLeft: clamped + '%',
+      rootFontSize: this.props.large ? '21px' : '15px',
+    };
+  }
+}
+</script>
+</body>
+</html>

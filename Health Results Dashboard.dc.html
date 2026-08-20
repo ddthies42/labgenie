@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" fill="#016ab3"/>
+  <g transform="translate(30,30)" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="16" cy="16" r="15"/>
+    <line x1="27" y1="27" x2="40" y2="40"/>
+    <path d="M12 8 H20 M13.5 8 V15 L8 24 a2 2 0 0 0 1.8 3 H22.2 a2 2 0 0 0 1.8 -3 L18.5 15 V8" fill="#ffffff" fill-opacity="0.18"/>
+  </g>
+</svg>
+</template>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>html,body{margin:0;padding:0}*{box-sizing:border-box}</style>
+</helmet>
+
+<sc-if value="{{ notAuthed }}" hint-placeholder-val="{{ true }}">
+  <div style="--accent:{{ accent }};font-family:Inter,sans-serif;min-height:100vh;background:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column">
+    <!-- background waves -->
+    <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0">
+      <svg viewBox="0 0 1440 760" preserveAspectRatio="none" style="position:absolute;bottom:0;left:0;width:100%;height:70%" fill="none">
+        <path d="M0 360 C 180 300 320 420 520 400 C 720 380 820 300 1010 320 C 1200 340 1320 420 1440 380 L1440 760 L0 760 Z" fill="#E8F0FA"></path>
+        <path d="M0 480 C 220 420 360 540 560 520 C 780 498 900 430 1080 452 C 1260 474 1340 540 1440 512 L1440 760 L0 760 Z" fill="#DCE8F7"></path>
+        <path d="M0 600 C 260 548 420 640 640 624 C 880 606 1000 560 1180 578 C 1320 592 1380 630 1440 616 L1440 760 L0 760 Z" fill="#CFE0F4"></path>
+      </svg>
+    </div>
+
+    <!-- top-left brand -->
+    <div style="position:relative;z-index:1;padding:32px 40px;display:flex;align-items:center;gap:14px">
+      <img src="logo-icon.png" alt="LabGenie" width="52" height="52" style="display:block;width:52px;height:52px;object-fit:contain;flex-shrink:0">
+      <div>
+        <div style="font-family:Figtree,sans-serif;font-size:26px;font-weight:800;line-height:1;letter-spacing:-0.01em"><span style="color:#111">LAB</span><span style="color:#1B75BC">GENIE</span></div>
+        <div style="font-family:Figtree,sans-serif;font-size:13px;font-weight:600;color:#6b7280;margin-top:4px">Understand your health better</div>
+      </div>
+    </div>
+
+    <!-- centered card -->
+    <div style="position:relative;z-index:1;flex:1;display:flex;align-items:flex-start;justify-content:center;padding:12px 24px 80px">
+      <div style="width:100%;max-width:480px;background:linear-gradient(180deg,#F4F8FC 0%,#EAF1F9 100%);border:1px solid #E1EAF4;border-radius:24px;box-shadow:0 24px 60px rgba(18,90,172,0.10);padding:48px 56px 56px">
+        <div style="display:flex;justify-content:center;margin-bottom:20px">
+          <img src="logo-icon.png" alt="" width="64" height="64" style="display:block;width:64px;height:64px;object-fit:contain">
+        </div>
+        <h1 style="text-align:center;margin:0;font-family:Figtree,sans-serif;font-size:32px;font-weight:800;color:#25282A;line-height:1.2">Welcome to Labgenie</h1>
+        <p style="text-align:center;margin:12px 0 0;font-size:18px;font-weight:500;color:#4B5563">Log in to view your results</p>
+
+        <form onSubmit="{{ submitLogin }}" style="margin-top:36px;display:flex;flex-direction:column;gap:24px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <label style="font-size:16px;font-weight:600;color:#25282A">Email address</label>
+            <input type="email" value="{{ email }}" onChange="{{ onEmail }}" placeholder="Your email" style="width:100%;height:56px;padding:0 20px;border-radius:12px;border:1.5px solid #C7D9EC;background:#fff;font-family:Inter,sans-serif;font-size:17px;color:#25282A;outline:none" style-focus="border-color:var(--accent,#016ab3)">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <label style="font-size:16px;font-weight:600;color:#25282A">Password</label>
+            <input type="password" value="{{ password }}" onChange="{{ onPassword }}" placeholder="Your password" style="width:100%;height:56px;padding:0 20px;border-radius:12px;border:1.5px solid #C7D9EC;background:#fff;font-family:Inter,sans-serif;font-size:17px;color:#25282A;outline:none" style-focus="border-color:var(--accent,#016ab3)">
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;margin-top:12px">
+            <button type="submit" style="width:100%;height:56px;border-radius:100px;border:1.5px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-family:Inter,sans-serif;font-size:17px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">Log in</button>
+            <button type="button" style="background:none;border:none;padding:0;cursor:pointer;font-size:15px;font-weight:600;color:var(--accent,#016ab3)" style-hover="opacity:0.7">Forgot password?</button>
+          </div>
+        </form>
+
+        <div style="margin-top:28px;display:flex;justify-content:center">
+          <button type="button" style="background:none;border:none;padding:0;cursor:pointer;font-size:17px;font-weight:700;color:var(--accent,#016ab3)" style-hover="opacity:0.7">Create an account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ authed }}" hint-placeholder-val="{{ false }}">
+<div style="--accent:{{ accent }};font-family:Inter,sans-serif;height:100vh;min-width:980px;display:flex;flex-direction:column;background:#fff;overflow:hidden">
+
+  <!-- ===== HEADER ===== -->
+  <div style="height:106px;flex-shrink:0;background:#fff;border-bottom:1px solid #E5EAF0;display:flex;align-items:center;justify-content:space-between;padding:14px 40px">
+    <!-- logo -->
+    <div onClick="{{ goDashboard }}" title="Go to your dashboard" style="display:flex;align-items:center;gap:14px;cursor:pointer" style-hover="opacity:0.75">
+      <img src="logo-icon.png" alt="LabGenie" width="48" height="48" style="display:block;width:48px;height:48px;object-fit:contain;flex-shrink:0">
+      <div>
+        <div style="font-family:Figtree,sans-serif;font-size:22px;font-weight:800;line-height:1"><span style="color:#111">LAB</span><span style="color:#1B75BC">GENIE</span></div>
+        <div style="font-family:Figtree,sans-serif;font-size:13px;font-weight:600;color:#6b7280;margin-top:4px;white-space:nowrap">Understand your health better</div>
+      </div>
+    </div>
+    <!-- nav -->
+    <div style="display:flex;gap:24px;align-items:center">
+      <div style="display:flex;gap:16px;align-items:center">
+        <button onClick="{{ goDashboard }}" style="display:flex;gap:8px;align-items:center;padding:12px 8px;background:transparent;border:none;border-bottom:1.5px solid;cursor:pointer;border-bottom-color:{{ dashBar }}">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 9.8L12 3l9 6.8V20a1 1 0 01-1 1h-5v-7H9v7H4a1 1 0 01-1-1V9.8z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span style="font-size:16px;line-height:22px;white-space:nowrap;color:{{ dashColor }};font-weight:{{ dashWeight }}">Your dashboard</span>
+        </button>
+        <button onClick="{{ goRecent }}" style="display:flex;gap:8px;align-items:center;padding:12px 8px;background:transparent;border:none;border-bottom:1.5px solid;cursor:pointer;border-bottom-color:{{ recentBar }}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 13h6M9 17h4" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round"></path></svg>
+          <span style="font-size:16px;line-height:22px;white-space:nowrap;color:{{ recentColor }};font-weight:{{ recentWeight }}">Recent results</span>
+        </button>
+        <button onClick="{{ goPast }}" style="display:flex;gap:8px;align-items:center;padding:12px 8px;background:transparent;border:none;border-bottom:1.5px solid;cursor:pointer;border-bottom-color:{{ pastBar }}">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 11v3l2 1" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span style="font-size:16px;line-height:22px;white-space:nowrap;color:{{ pastColor }};font-weight:{{ pastWeight }}">Past results</span>
+        </button>
+      </div>
+      <div style="width:1px;height:48px;background:#BAD3DD"></div>
+      <button style="width:45px;height:45px;border-radius:100px;background:transparent;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#f9fafb">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#25282A" stroke-width="1.8"></circle><path d="M21 21l-4-4" stroke="#25282A" stroke-width="1.8" stroke-linecap="round"></path></svg>
+      </button>
+      <button onClick="{{ goPrep }}" style="position:relative;width:45px;height:45px;border-radius:100px;background:transparent;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#f9fafb">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="{{ bmHeaderFill }}" stroke="{{ bmHeaderStroke }}" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+        <sc-if value="{{ showSavedBadge }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:-2px;right:-2px;background:var(--accent,#016ab3);min-width:18px;height:18px;padding:0 4px;border-radius:9999px;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:11px;font-weight:700;color:#fff">{{ savedCount }}</span>
+          </div>
+        </sc-if>
+      </button>
+      <div style="width:1px;height:48px;background:#BAD3DD"></div>
+      <div style="display:flex;gap:8px;align-items:center;padding:8px 0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#25282A" stroke-width="2"></circle><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" stroke="#25282A" stroke-width="2" stroke-linecap="round"></path></svg>
+        <span style="font-size:16px;font-weight:500;color:#25282a;white-space:nowrap">Sam R.</span>
+        <svg width="15" height="9" viewBox="0 0 15 8.5" fill="none"><path d="M1 1L7.5 7.5L14 1" stroke="#25282A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONTENT ===== -->
+  <div style="flex:1;position:relative;overflow:hidden">
+
+    <!-- ========== DASHBOARD ========== -->
+    <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;height:100%;position:relative;padding-left:48px;gap:24px">
+        {{ bgDecoEl }}
+        <div style="flex:1;overflow-y:auto;min-width:0;position:relative;z-index:1;padding:24px 0 48px">
+          <div style="margin-bottom:24px">
+            <p style="font-size:13px;font-weight:500;color:#9CA3AF;line-height:20px">Date of Test Results: May 28, 2026</p>
+            <p style="margin-top:4px;font-size:20px;font-weight:500;color:#25282A;line-height:30px">Hi Sam, here is a summary of your recent laboratory results.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+
+            <div style="background:#fff;border-radius:20px;border:1px solid #DAE0EE;padding:32px">
+              <p style="font-family:Figtree,sans-serif;font-size:28px;font-weight:700;color:#25282A">What Matters Now</p>
+              <p style="margin-top:16px;font-size:17px;font-weight:500;color:#303030;line-height:26px">Your thyroid results show a pattern your care team will want to review — your TSH is a little higher than usual and your Free T4 is a little lower than usual. TSH and Free T4 are two of the main tests used to keep track of thyroid health. Your thyroid helps regulate things like your energy levels, body temperature, and metabolism. Have you been feeling more tired than usual, colder than others around you, or a little more slowed down lately? This is worth bringing up at your next visit so you can talk through what these results may mean and what to keep an eye on.</p>
+            </div>
+
+            <div style="background:#fff;border-radius:20px;border:1px solid #DAE0EE;padding:32px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <p style="font-family:Figtree,sans-serif;font-size:28px;font-weight:700;color:#25282A">Critical Test Results</p>
+                <button onClick="{{ goRecent }}" style="display:flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font-size:14px;font-weight:700;color:var(--accent,#016ab3)" style-hover="opacity:0.7">Open full results →</button>
+              </div>
+              <sc-for list="{{ criticalTests }}" as="t" hint-placeholder-count="3">
+                <div>
+                  <div style="width:100%;height:1px;background:#E5EAF0"></div>
+                  <div style="display:flex;align-items:center;gap:20px;padding:16px 0">
+                    <div style="display:flex;align-items:flex-start;gap:8px;flex-shrink:0;width:32%">
+                      <svg width="22" height="20" viewBox="0 0 22.53 20" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M11.2634 7.50414V11.5041M11.2634 15.5041H11.2734M9.87872 2.39586L1.65383 16.6025C1.19763 17.3905 0.969524 17.7845 1.00324 18.1078C1.03264 18.3899 1.18041 18.6462 1.40977 18.8129C1.67273 19.0041 2.12799 19.0041 3.03852 19.0041H19.4883C20.3988 19.0041 20.8541 19.0041 21.117 18.8129C21.3464 18.6462 21.4942 18.3899 21.5236 18.1078C21.5573 17.7845 21.3292 17.3905 20.873 16.6025L12.6481 2.39586C12.1935 1.61069 11.9662 1.21811 11.6697 1.08626C11.411 0.971247 11.1158 0.971247 10.8571 1.08626C10.5606 1.21811 10.3333 1.6107 9.87872 2.39586Z" stroke="#ED4646" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      <span style="font-family:Figtree,sans-serif;font-size:17px;font-weight:700;color:#303030;line-height:26px">{{ t.name }}</span>
+                    </div>
+                    <div style="flex:1;background:#FBFBFB;border-radius:10px;border:1px solid #DAE0EE;padding:12px 16px;height:136px;display:flex;align-items:center;min-width:0">
+                      <div style="width:100%;min-width:0"><dc-import name="RangeBar" segments="{{ t.segments }}" value="{{ t.value }}" marker-pct="{{ t.markerPct }}" hint-size="100%,120px"></dc-import></div>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="background:#fff;border-radius:20px;border:1px solid #DAE0EE;padding:32px">
+              <p style="font-family:Figtree,sans-serif;font-size:28px;font-weight:700;color:#25282A">Next Steps</p>
+              <div style="margin-top:16px;display:flex;flex-direction:column">
+                <sc-for list="{{ nextSteps }}" as="step" hint-placeholder-count="3">
+                  <div>
+                    <div style="width:100%;height:1px;background:#E5EAF0"></div>
+                    <div style="{{ step.rowStyle }}" style-hover="{{ step.rowHover }}">
+                      <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;width:28px;height:28px;border-radius:500px;border:1.5px solid var(--accent,#016ab3)">
+                        <span style="font-size:15px;font-weight:700;color:var(--accent,#016ab3);line-height:22px">{{ step.num }}</span>
+                      </div>
+                      <p style="flex:1;font-size:17px;font-weight:500;color:#303030;line-height:26px">{{ step.text }}</p>
+                      <button onClick="{{ step.toggle }}" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:#F0F7FA;border:none;cursor:pointer;flex-shrink:0" style-hover="opacity:0.85">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="{{ step.bmFill }}" stroke="var(--accent,#016ab3)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                        <span style="font-size:15px;font-weight:700;color:var(--accent,#016ab3);line-height:22px">Save</span>
+                      </button>
+                    </div>
+                  </div>
+                </sc-for>
+                <div style="width:100%;height:1px;background:#E5EAF0"></div>
+              </div>
+            </div>
+
+            <div style="background:#fff;border-radius:20px;border:1px solid #DAE0EE;padding:32px">
+              <p style="font-family:Figtree,sans-serif;font-size:28px;font-weight:700;color:#25282A">Questions to Ask Your Care Team</p>
+              <div style="margin-top:24px;display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ questions }}" as="q" hint-placeholder-count="3">
+                  <div style="{{ q.rowStyle }}" style-hover="{{ q.rowHover }}">
+                    <span style="flex:1;font-size:15px;font-weight:500;color:#25282A;line-height:22px">{{ q.text }}</span>
+                    <button onClick="{{ q.toggle }}" style="background:none;border:none;cursor:pointer;flex-shrink:0;display:flex" style-hover="opacity:0.7">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="{{ q.bmFill }}" stroke="var(--accent,#016ab3)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                    </button>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;justify-content:flex-end;margin-top:16px">
+                <button style="display:flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font-size:14px;font-weight:700;color:var(--accent,#016ab3)" style-hover="opacity:0.7">Get more questions to ask →</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div style="flex-shrink:0;width:380px;border-left:1px solid #E5EAF0;background:#fff;position:relative;z-index:1">
+          <dc-import name="LabGenieChat" chips="{{ dashChips }}" greeting="{{ dashGreeting }}" hint="{{ dashHint }}" hint-size="100%,100%"></dc-import>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ========== RECENT RESULTS ========== -->
+    <sc-if value="{{ isRecent }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;overflow-y:auto;position:relative">
+        {{ bgDecoEl }}
+        <div style="position:relative;z-index:1;padding:24px 48px 80px">
+
+          <div style="background:#fff;border-radius:20px;border:1px solid #dae0ee;padding:32px;margin-bottom:24px">
+            <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap">
+              <p style="font-family:Figtree,sans-serif;font-size:32px;font-weight:700;color:#25282a">Latest results (Sept. 14, 2025)</p>
+              <div style="display:flex;gap:16px">
+                <div style="background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">3 Panels</span></div>
+                <div style="background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">10 Tests</span></div>
+              </div>
+            </div>
+            <div style="display:flex;gap:24px;align-items:center;margin-top:16px">
+              <div style="display:flex;gap:8px;align-items:center">
+                <svg width="22" height="20" viewBox="0 0 22.53 20" fill="none"><path d="M11.2634 7.50414V11.5041M11.2634 15.5041H11.2734M9.87872 2.39586L1.65383 16.6025C1.19763 17.3905 0.969524 17.7845 1.00324 18.1078C1.03264 18.3899 1.18041 18.6462 1.40977 18.8129C1.67273 19.0041 2.12799 19.0041 3.03852 19.0041H19.4883C20.3988 19.0041 20.8541 19.0041 21.117 18.8129C21.3464 18.6462 21.4942 18.3899 21.5236 18.1078C21.5573 17.7845 21.3292 17.3905 20.873 16.6025L12.6481 2.39586C12.1935 1.61069 11.9662 1.21811 11.6697 1.08626C11.411 0.971247 11.1158 0.971247 10.8571 1.08626C10.5606 1.21811 10.3333 1.6107 9.87872 2.39586Z" stroke="#ED4646" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                <span style="font-size:16px;font-weight:500;color:#ed4646">7 Tests outside standard range</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M21 10.08V11a10 10 0 11-5.93-9.14M21 3L11 13l-3-3" stroke="#28BD4B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                <span style="font-size:16px;font-weight:500;color:#28bd4b">3 Tests within standard range</span>
+              </div>
+            </div>
+            <div style="margin-top:28px">
+              <p style="font-family:Figtree,sans-serif;font-size:26px;font-weight:700;color:#25282a">What your test results mean</p>
+              <p style="margin-top:16px;font-size:18px;font-weight:500;color:#303030;line-height:26px">Your latest thyroid test results show a much larger drop in hormone levels compared to your typical range. The numbers may mean that your thyroid is not keeping up, and this may be slowing down your body's metabolism. This drop could lead to serious issues if it isn't handled soon.</p>
+              <button style="margin-top:28px;width:100%;height:48px;border-radius:100px;border:1.5px solid var(--accent,#016ab3);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px" style-hover="background:#F0F7FA">
+                <span style="font-size:16px;font-weight:700;color:var(--accent,#016ab3)">Download full results</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <sc-if value="{{ recentStandard }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <sc-for list="{{ panels }}" as="panel" hint-placeholder-count="3">
+              <div style="background:#fff;border-radius:20px;border:1px solid #DAE0EE;padding:32px">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px">
+                  <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0">
+                    <p style="margin:0;font-family:Figtree,sans-serif;font-size:26px;font-weight:700;color:#25282a">{{ panel.title }}</p>
+                    <span style="font-size:18px;font-weight:700;color:{{ panel.statusColor }}">{{ panel.statusText }}</span>
+                    <button onClick="{{ panel.toggleDesc }}" title="What is this panel?" style="flex-shrink:0;width:26px;height:26px;border-radius:9999px;border:1.5px solid #C7D2DE;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-style:italic;font-size:15px;font-weight:700;color:#6b7280;line-height:1" style-hover="background:#F0F7FA;border-color:var(--accent,#016ab3);color:var(--accent,#016ab3)">{{ panel.descIcon }}</button>
+                  </div>
+                  <div style="flex-shrink:0;background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">{{ panel.badge }}</span></div>
+                </div>
+                <sc-if value="{{ panel.descOpen }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin-bottom:24px;display:flex;gap:12px;align-items:flex-start;background:#F0F7FA;border:1px solid #D6E8F2;border-radius:12px;padding:16px 18px">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="var(--accent,#016ab3)" stroke-width="2"></circle><path d="M12 11v5M12 8h.01" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round"></path></svg>
+                    <p style="margin:0;font-size:16px;font-weight:500;line-height:24px;color:#25282a">{{ panel.description }}</p>
+                  </div>
+                </sc-if>
+                <div style="display:flex;flex-direction:column;gap:16px">
+                  <sc-for list="{{ panel.groups }}" as="grp" hint-placeholder-count="1">
+
+                    <div style="border-radius:10px;border:1px solid {{ grp.borderColor }};overflow:hidden">
+                      <div data-labgrid style="padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));column-gap:24px;row-gap:32px;align-items:start;position:relative">
+                        <sc-for list="{{ grp.tests }}" as="test" hint-placeholder-count="2">
+                          <div data-labcard style="grid-column:{{ test.gridSpan }};min-width:0;display:flex;flex-direction:column;gap:14px">
+                            <div style="display:flex;gap:10px;align-items:flex-start">
+                              <sc-if value="{{ test.abnormal }}" hint-placeholder-val="{{ true }}">
+                                <span style="flex-shrink:0;height:26px;display:flex;align-items:center"><svg width="24" height="22" viewBox="0 0 22.53 20" fill="none" style="display:block"><path d="M11.2634 7.50414V11.5041M11.2634 15.5041H11.2734M9.87872 2.39586L1.65383 16.6025C1.19763 17.3905 0.969524 17.7845 1.00324 18.1078C1.03264 18.3899 1.18041 18.6462 1.40977 18.8129C1.67273 19.0041 2.12799 19.0041 3.03852 19.0041H19.4883C20.3988 19.0041 20.8541 19.0041 21.117 18.8129C21.3464 18.6462 21.4942 18.3899 21.5236 18.1078C21.5573 17.7845 21.3292 17.3905 20.873 16.6025L12.6481 2.39586C12.1935 1.61069 11.9662 1.21811 11.6697 1.08626C11.411 0.971247 11.1158 0.971247 10.8571 1.08626C10.5606 1.21811 10.3333 1.6107 9.87872 2.39586Z" stroke="#ED4646" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+                              </sc-if>
+                              <sc-if value="{{ test.isNormal }}" hint-placeholder-val="{{ false }}">
+                                <span style="flex-shrink:0;height:26px;display:flex;align-items:center"><svg width="24" height="24" viewBox="0 0 22 22" fill="none" style="display:block"><path d="M21 10.08V11a10 10 0 11-5.93-9.14M21 3L11 13l-3-3" stroke="#28BD4B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+                              </sc-if>
+                              <p style="flex:1;margin:0;font-family:Figtree,sans-serif;font-size:18px;font-weight:700;color:#303030;line-height:26px">{{ test.name }}</p>
+                            </div>
+                            <p style="font-size:16px;color:#25282a"><span style="font-weight:700">Your Result:</span><span style="font-weight:500"> {{ test.value }}</span></p>
+                            <div style="background:#fbfbfb;border:1px solid #dae0ee;border-radius:10px;padding:24px 28px;display:flex;align-items:center">
+                              <div style="width:100%;min-width:0"><dc-import name="RangeBar" segments="{{ test.segments }}" value="{{ test.value }}" marker-pct="{{ test.markerPct }}" large="{{ true }}" hint-size="100%,150px"></dc-import></div>
+                            </div>
+                            <div>
+                              <p style="margin-bottom:6px;font-size:16px;color:#25282a"><span style="font-weight:700">Standard range:</span><span style="font-weight:500"> {{ test.rangeText }}</span></p>
+                              <p style="font-size:16px;font-weight:500;color:#25282a;line-height:22px">{{ test.desc }}</p>
+                            </div>
+                            <sc-if value="{{ test.hasTrend }}" hint-placeholder-val="{{ false }}">
+                              <button onClick="{{ test.toggleTrend }}" style="width:100%;margin-top:2px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid #D6E8F2;background:{{ test.trendBtnBg }};cursor:pointer;font-size:16px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
+                                <span>{{ test.trendLabel }}</span>
+                                <sc-if value="{{ test.trendIsDropdown }}" hint-placeholder-val="{{ true }}">
+                                  <svg width="15" height="9" viewBox="0 0 15 8.5" fill="none" style="transform:{{ test.chevronRot }}"><path d="M1 1L7.5 7.5L14 1" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                </sc-if>
+                                <sc-if value="{{ test.trendIsPopup }}" hint-placeholder-val="{{ false }}">
+                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 3h6v6M21 3l-9 9M9 21H3v-6M3 21l9-9" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                </sc-if>
+                              </button>
+                              <sc-if value="{{ test.trendInlineOpen }}" hint-placeholder-val="{{ false }}">
+                                <div style="margin-top:4px">{{ test.trendEl }}</div>
+                              </sc-if>
+                            </sc-if>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ recentPrioritized }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:24px">
+              <sc-for list="{{ recentPanels }}" as="panel" hint-placeholder-count="3">
+                <div style="background:#fff;border-radius:20px;border:1px solid #DAE0EE;padding:32px">
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+                    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0">
+                      <p style="margin:0;font-family:Figtree,sans-serif;font-size:26px;font-weight:700;color:#25282a">{{ panel.title }}</p>
+                      <span style="font-size:18px;font-weight:700;color:{{ panel.statusColor }}">{{ panel.statusText }}</span>
+                      <button onClick="{{ panel.toggleDesc }}" title="What is this panel?" style="flex-shrink:0;width:26px;height:26px;border-radius:9999px;border:1.5px solid #C7D2DE;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-style:italic;font-size:15px;font-weight:700;color:#6b7280;line-height:1" style-hover="background:#F0F7FA;border-color:var(--accent,#016ab3);color:var(--accent,#016ab3)">{{ panel.descIcon }}</button>
+                    </div>
+                    <div style="flex-shrink:0;background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">{{ panel.badge }}</span></div>
+                  </div>
+
+                  <sc-if value="{{ panel.descOpen }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:16px;display:flex;gap:12px;align-items:flex-start;background:#F0F7FA;border:1px solid #D6E8F2;border-radius:12px;padding:16px 18px">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="var(--accent,#016ab3)" stroke-width="2"></circle><path d="M12 11v5M12 8h.01" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round"></path></svg>
+                      <p style="margin:0;font-size:16px;font-weight:500;line-height:24px;color:#25282a">{{ panel.description }}</p>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ panel.hasAbnormal }}" hint-placeholder-val="{{ true }}">
+                    <div style="margin-top:24px;display:flex;flex-direction:column;gap:20px">
+                      <sc-for list="{{ panel.abnormalTests }}" as="test" hint-placeholder-count="2">
+                        <div style="min-width:0;border:1px solid #F3C9CD;background:#FFFDFD;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+                          <div style="display:flex;gap:10px;align-items:center">
+                            <span style="flex-shrink:0;height:28px;display:flex;align-items:center"><svg width="26" height="24" viewBox="0 0 22.53 20" fill="none" style="display:block"><path d="M11.2634 7.50414V11.5041M11.2634 15.5041H11.2734M9.87872 2.39586L1.65383 16.6025C1.19763 17.3905 0.969524 17.7845 1.00324 18.1078C1.03264 18.3899 1.18041 18.6462 1.40977 18.8129C1.67273 19.0041 2.12799 19.0041 3.03852 19.0041H19.4883C20.3988 19.0041 20.8541 19.0041 21.117 18.8129C21.3464 18.6462 21.4942 18.3899 21.5236 18.1078C21.5573 17.7845 21.3292 17.3905 20.873 16.6025L12.6481 2.39586C12.1935 1.61069 11.9662 1.21811 11.6697 1.08626C11.411 0.971247 11.1158 0.971247 10.8571 1.08626C10.5606 1.21811 10.3333 1.6107 9.87872 2.39586Z" stroke="#ED4646" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+                            <p style="flex:1;margin:0;font-family:Figtree,sans-serif;font-size:20px;font-weight:700;color:#303030;line-height:28px">{{ test.name }}</p>
+                          </div>
+                          <p style="font-size:17px;color:#25282a"><span style="font-weight:700">Your Result:</span><span style="font-weight:500"> {{ test.value }}</span></p>
+                          <div style="background:#fff;border:1px solid #dae0ee;border-radius:10px;padding:26px 32px;display:flex;align-items:center">
+                            <div style="width:100%;min-width:0"><dc-import name="RangeBar" segments="{{ test.segments }}" value="{{ test.value }}" marker-pct="{{ test.markerPct }}" large="{{ true }}" hint-size="100%,150px"></dc-import></div>
+                          </div>
+                          <div>
+                            <p style="margin-bottom:6px;font-size:16px;color:#25282a"><span style="font-weight:700">Standard range:</span><span style="font-weight:500"> {{ test.rangeText }}</span></p>
+                            <p style="font-size:16px;font-weight:500;color:#25282a;line-height:24px">{{ test.desc }}</p>
+                          </div>
+                          <sc-if value="{{ test.hasTrend }}" hint-placeholder-val="{{ false }}">
+                            <button onClick="{{ test.toggleTrend }}" style="width:100%;margin-top:2px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid #D6E8F2;background:{{ test.trendBtnBg }};cursor:pointer;font-size:16px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
+                              <span>{{ test.trendLabel }}</span>
+                              <sc-if value="{{ test.trendIsDropdown }}" hint-placeholder-val="{{ true }}">
+                                <svg width="15" height="9" viewBox="0 0 15 8.5" fill="none" style="transform:{{ test.chevronRot }}"><path d="M1 1L7.5 7.5L14 1" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                              </sc-if>
+                              <sc-if value="{{ test.trendIsPopup }}" hint-placeholder-val="{{ false }}">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 3h6v6M21 3l-9 9M9 21H3v-6M3 21l9-9" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                              </sc-if>
+                            </button>
+                            <sc-if value="{{ test.trendInlineOpen }}" hint-placeholder-val="{{ false }}">
+                              <div style="margin-top:4px">{{ test.trendEl }}</div>
+                            </sc-if>
+                          </sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ panel.hasNormal }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:24px;display:flex;align-items:center;gap:8px">
+                      <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style="display:block"><path d="M21 10.08V11a10 10 0 11-5.93-9.14M21 3L11 13l-3-3" stroke="#28BD4B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      <span style="font-size:15px;font-weight:600;color:#28BD4B">{{ panel.normalLabel }}</span>
+                    </div>
+                    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:20px;align-items:start">
+                      <sc-for list="{{ panel.normalTests }}" as="test" hint-placeholder-count="2">
+                        <div style="min-width:0;border:1px solid #E5EAF0;background:#fff;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+                          <div style="display:flex;gap:10px;align-items:center">
+                            <span style="flex-shrink:0;height:26px;display:flex;align-items:center"><svg width="24" height="24" viewBox="0 0 22 22" fill="none" style="display:block"><path d="M21 10.08V11a10 10 0 11-5.93-9.14M21 3L11 13l-3-3" stroke="#28BD4B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+                            <p style="flex:1;margin:0;font-family:Figtree,sans-serif;font-size:17px;font-weight:700;color:#303030;line-height:24px">{{ test.name }}</p>
+                          </div>
+                          <p style="font-size:15px;color:#25282a"><span style="font-weight:700">Your Result:</span><span style="font-weight:500"> {{ test.value }}</span></p>
+                          <div style="background:#fbfbfb;border:1px solid #dae0ee;border-radius:10px;padding:18px 20px;display:flex;align-items:center">
+                            <div style="width:100%;min-width:0"><dc-import name="RangeBar" segments="{{ test.segments }}" value="{{ test.value }}" marker-pct="{{ test.markerPct }}" hint-size="100%,120px"></dc-import></div>
+                          </div>
+                          <p style="font-size:14px;color:#6b7280"><span style="font-weight:700">Standard range:</span><span style="font-weight:500"> {{ test.rangeText }}</span></p>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+
+      <sc-if value="{{ trendModalOpen }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ closeTrendModal }}" style="position:fixed;inset:0;background:rgba(20,28,46,0.55);z-index:200;display:flex;align-items:center;justify-content:center;padding:40px">
+          <div onClick="{{ stopProp }}" style="background:#fff;border-radius:18px;width:100%;max-width:1180px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.32)">
+            <div style="position:sticky;top:0;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;border-bottom:1px solid #E5EAF0;border-radius:18px 18px 0 0">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="flex-shrink:0;height:28px;display:flex;align-items:center"><svg width="26" height="24" viewBox="0 0 22.53 20" fill="none" style="display:block"><path d="M11.2634 7.50414V11.5041M11.2634 15.5041H11.2734M9.87872 2.39586L1.65383 16.6025C1.19763 17.3905 0.969524 17.7845 1.00324 18.1078C1.03264 18.3899 1.18041 18.6462 1.40977 18.8129C1.67273 19.0041 2.12799 19.0041 3.03852 19.0041H19.4883C20.3988 19.0041 20.8541 19.0041 21.117 18.8129C21.3464 18.6462 21.4942 18.3899 21.5236 18.1078C21.5573 17.7845 21.3292 17.3905 20.873 16.6025L12.6481 2.39586C12.1935 1.61069 11.9662 1.21811 11.6697 1.08626C11.411 0.971247 11.1158 0.971247 10.8571 1.08626C10.5606 1.21811 10.3333 1.6107 9.87872 2.39586Z" stroke="#ED4646" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+                <p style="margin:0;font-family:Figtree,sans-serif;font-size:22px;font-weight:700;color:#25282a">{{ trendModalTitle }}</p>
+              </div>
+              <button onClick="{{ closeTrendModal }}" style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid #E5EAF0;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#f3f4f6">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#25282A"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              </button>
+            </div>
+            <div style="padding:28px">{{ trendModalEl }}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ recentChatClosed }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ openRecentChat }}" style="position:fixed;bottom:32px;right:32px;display:flex;align-items:center;gap:12px;padding:16px 24px;border-radius:9999px;background:var(--accent,#016ab3);border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.18);z-index:50" style-hover="opacity:0.92">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 2H5C3.9 2 3 2.9 3 4V18C3 19.1 3.9 20 5 20H9L11.29 22.29C11.68 22.68 12.31 22.68 12.7 22.29L15 20H19C20.1 20 21 19.1 21 18V4C21 2.9 20.1 2 19 2ZM13.88 12.88L12 17L10.12 12.88L6 11L10.12 9.12L12 5L13.88 9.12L18 11L13.88 12.88Z" fill="white"></path></svg>
+          <span style="font-size:16px;font-weight:700;color:#fff">Ask LabGenie</span>
+        </button>
+      </sc-if>
+      <sc-if value="{{ recentChatOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:fixed;bottom:32px;right:32px;width:380px;height:560px;background:#fff;border-radius:12px 12px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,0.15);z-index:100;overflow:hidden;display:flex;flex-direction:column">
+          <dc-import name="LabGenieChat" chips="{{ recentChips }}" greeting="{{ recentGreeting }}" hint="{{ recentHint }}" closeable="{{ true }}" on-close="{{ closeRecentChat }}" hint-size="100%,100%"></dc-import>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <!-- ========== MY PREP LIST ========== -->
+    <sc-if value="{{ isPrep }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;overflow-y:auto;background:#fff">
+        <div style="padding:48px 80px;max-width:900px;margin:0 auto">
+
+          <sc-if value="{{ prepEmpty }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="1.5" style="margin-bottom:24px"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+              <h2 style="font-family:Figtree,sans-serif;font-size:24px;font-weight:700;color:#25282A;margin:0 0 12px">Nothing saved yet</h2>
+              <p style="font-size:16px;font-weight:500;color:#6B7280;line-height:24px;max-width:400px;text-align:center;margin:0 0 32px">Tap the bookmark icon on any question or next step on your dashboard to save it here.</p>
+              <button onClick="{{ goDashboard }}" style="padding:12px 24px;border-radius:8px;border:2px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-size:16px;font-weight:600;color:var(--accent,#016ab3)" style-hover="background:#f9fafb">Go to your dashboard →</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ prepHasItems }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-bottom:24px">
+              <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:700;color:#25282A;margin:0 0 8px">My Prep List</h1>
+              <p style="font-size:14px;font-weight:500;color:#6B7280;margin:0">Saved items to bring to your next visit · May 28, 2026</p>
+            </div>
+            <button style="width:100%;margin-bottom:32px;padding:16px 24px;border-radius:8px;background:var(--accent,#016ab3);border:none;cursor:pointer;font-size:16px;font-weight:700;color:#fff" style-hover="opacity:0.92">Print my prep list →</button>
+
+            <sc-if value="{{ prepHasQuestions }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-bottom:32px">
+                <h2 style="font-family:Figtree,sans-serif;font-size:22px;font-weight:700;color:#25282A;margin:0 0 16px">Questions to Ask My Care Team</h2>
+                <div style="display:flex;flex-direction:column">
+                  <sc-for list="{{ prepQuestions }}" as="item" hint-placeholder-count="2">
+                    <div style="{{ item.wrapStyle }}">
+                      <div style="padding:16px 0;display:flex;align-items:flex-start;gap:16px">
+                        <button onClick="{{ item.toggleCheck }}" style="{{ item.checkStyle }}">
+                          <sc-if value="{{ item.checked }}" hint-placeholder-val="{{ false }}">
+                            <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                          </sc-if>
+                        </button>
+                        <div style="flex:1;min-width:0">
+                          <p style="font-size:16px;font-weight:500;color:#25282A;line-height:24px;margin:0">{{ item.text }}</p>
+                          <p style="margin:4px 0 0;font-size:12px;font-weight:500;color:#9CA3AF">From: Dashboard · May 28, 2026</p>
+                        </div>
+                        <button onClick="{{ item.remove }}" style="flex-shrink:0;padding:4px;border-radius:4px;background:none;border:none;cursor:pointer;margin-top:2px" style-hover="background:#f3f4f6">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4L12 12" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"></path></svg>
+                        </button>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ prepHasSteps }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-bottom:32px">
+                <h2 style="font-family:Figtree,sans-serif;font-size:22px;font-weight:700;color:#25282A;margin:0 0 16px">Steps to Take</h2>
+                <div style="display:flex;flex-direction:column">
+                  <sc-for list="{{ prepSteps }}" as="item" hint-placeholder-count="2">
+                    <div style="{{ item.wrapStyle }}">
+                      <div style="padding:16px 0;display:flex;align-items:flex-start;gap:16px">
+                        <button onClick="{{ item.toggleCheck }}" style="{{ item.checkStyle }}">
+                          <sc-if value="{{ item.checked }}" hint-placeholder-val="{{ false }}">
+                            <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                          </sc-if>
+                        </button>
+                        <div style="flex-shrink:0;margin-top:1px;width:24px;height:24px;border-radius:9999px;border:2px solid var(--accent,#016ab3);display:flex;align-items:center;justify-content:center">
+                          <span style="font-size:13px;font-weight:600;color:var(--accent,#016ab3)">{{ item.num }}</span>
+                        </div>
+                        <div style="flex:1;min-width:0">
+                          <p style="font-size:16px;font-weight:500;color:#25282A;line-height:24px;margin:0">{{ item.text }}</p>
+                          <p style="margin:4px 0 0;font-size:12px;font-weight:500;color:#9CA3AF">From: Dashboard · May 28, 2026</p>
+                        </div>
+                        <button onClick="{{ item.remove }}" style="flex-shrink:0;padding:4px;border-radius:4px;background:none;border:none;cursor:pointer;margin-top:2px" style-hover="background:#f3f4f6">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4L12 12" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"></path></svg>
+                        </button>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <div style="display:flex;justify-content:flex-end">
+              <button onClick="{{ clearAll }}" style="background:none;border:none;padding:0;cursor:pointer;font-size:14px;font-weight:500;color:#9CA3AF" style-hover="opacity:0.7">Clear all</button>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ========== PAST RESULTS ========== -->
+    <sc-if value="{{ isPast }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;overflow-y:auto;position:relative">
+        {{ bgDecoEl }}
+        <div style="position:relative;z-index:1;padding:24px 48px 80px;max-width:920px;margin:0 auto">
+
+          <!-- LIST VIEW -->
+          <sc-if value="{{ pastListView }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px">
+              <div>
+                <p style="font-family:Figtree,sans-serif;font-size:32px;font-weight:700;color:#25282a;margin:0">Past Results</p>
+                <p style="margin:8px 0 0;font-size:16px;font-weight:500;color:#6b7280">Your lab visits, most recent first. Select a visit to see its results.</p>
+              </div>
+              <button onClick="{{ printPage }}" style="flex-shrink:0;display:flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1.5px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-size:15px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                Print
+              </button>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <sc-for list="{{ visits }}" as="v" hint-placeholder-count="4">
+                <button onClick="{{ v.open }}" style="text-align:left;width:100%;background:#fff;border:1px solid #DAE0EE;border-radius:16px;padding:24px 28px;cursor:pointer;display:flex;align-items:center;gap:24px;transition:border-color .15s,box-shadow .15s" style-hover="border-color:#B8DBF0;box-shadow:0 4px 16px rgba(13,78,162,0.08)">
+                  <div style="flex-shrink:0;width:64px;height:64px;border-radius:14px;background:#F0F7FA;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1">
+                    <span style="font-size:22px;font-weight:800;color:var(--accent,#016ab3)">{{ v.day }}</span>
+                    <span style="font-size:12px;font-weight:700;color:var(--accent,#016ab3);text-transform:uppercase;letter-spacing:0.04em;margin-top:2px">{{ v.mon }}</span>
+                  </div>
+                  <div style="flex:1;min-width:0">
+                    <p style="margin:0;font-family:Figtree,sans-serif;font-size:20px;font-weight:700;color:#25282a">{{ v.date }}</p>
+                    <p style="margin:6px 0 0;font-size:15px;font-weight:500;color:#6b7280">Ordered by {{ v.doctor }} · {{ v.specialty }}</p>
+                    <p style="margin:4px 0 0;font-size:14px;font-weight:500;color:#9CA3AF">{{ v.panelsText }}</p>
+                  </div>
+                  <div style="flex-shrink:0;display:flex;align-items:center;gap:16px">
+                    <span style="display:inline-flex;align-items:center;padding:8px 14px;border-radius:9999px;font-size:14px;font-weight:700;background:{{ v.badgeBg }};color:{{ v.badgeColor }};border:1px solid {{ v.badgeBorder }};white-space:nowrap">{{ v.badgeText }}</span>
+                    <svg width="13" height="13" viewBox="0 0 12.5 12.5" fill="none"><path d="M1 1L6.25 6.25L1 11.5" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  </div>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <!-- DETAIL VIEW -->
+          <sc-if value="{{ pastDetailView }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ closeVisit }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;padding:0;margin-bottom:20px;cursor:pointer;font-size:15px;font-weight:700;color:var(--accent,#016ab3)" style-hover="opacity:0.7">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              All visits
+            </button>
+
+            <div style="background:#fff;border:1px solid #DAE0EE;border-radius:16px;padding:28px 32px;margin-bottom:20px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+              <div>
+                <p style="margin:0;font-family:Figtree,sans-serif;font-size:28px;font-weight:700;color:#25282a">{{ activeVisit.date }}</p>
+                <p style="margin:8px 0 0;font-size:16px;font-weight:500;color:#6b7280">Ordered by {{ activeVisit.doctor }} · {{ activeVisit.specialty }}</p>
+                <span style="display:inline-flex;align-items:center;margin-top:14px;padding:8px 14px;border-radius:9999px;font-size:14px;font-weight:700;background:{{ activeVisit.badgeBg }};color:{{ activeVisit.badgeColor }};border:1px solid {{ activeVisit.badgeBorder }}">{{ activeVisit.badgeText }}</span>
+              </div>
+              <button onClick="{{ printPage }}" style="flex-shrink:0;display:flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1.5px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-size:15px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                Print
+              </button>
+            </div>
+
+            <div style="background:#fff;border:1px solid #DAE0EE;border-radius:16px;overflow:hidden">
+              <div style="display:grid;grid-template-columns:2.4fr 1.1fr 1.4fr 1fr;padding:16px 28px;background:#FBFCFE;border-bottom:1px solid #E5EAF0">
+                <span style="font-size:12px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.05em">Test</span>
+                <span style="font-size:12px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.05em">Result</span>
+                <span style="font-size:12px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.05em">Standard range</span>
+                <span style="font-size:12px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.05em;text-align:right">Status</span>
+              </div>
+              <sc-for list="{{ activeVisit.tests }}" as="t" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:2.4fr 1.1fr 1.4fr 1fr;align-items:center;padding:18px 28px;border-bottom:1px solid #EEF1F6">
+                  <span style="font-size:16px;font-weight:600;color:#25282a;padding-right:12px">{{ t.name }}</span>
+                  <span style="font-size:16px;font-weight:700;color:#25282a">{{ t.value }}</span>
+                  <span style="font-size:15px;font-weight:500;color:#6b7280">{{ t.range }}</span>
+                  <span style="justify-self:end;display:inline-flex;align-items:center;padding:5px 12px;border-radius:9999px;font-size:13px;font-weight:700;background:{{ t.pillBg }};color:{{ t.pillColor }}">{{ t.status }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#016ab3&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bgStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Soft glow&quot;,&quot;options&quot;:[&quot;Soft glow&quot;,&quot;Clean white&quot;,&quot;Subtle grid&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;trendStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Popup overlay&quot;,&quot;options&quot;:[&quot;Dropdown&quot;,&quot;Popup overlay&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;recentLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Standard&quot;,&quot;options&quot;:[&quot;Standard&quot;,&quot;Prioritized&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+/* Self-contained child-DC registration for standalone/deployed pages (e.g. Vercel).
+   In the editor the page runs inside an iframe (window.parent !== window), so we skip
+   this and let the runtime fetch the sibling .dc.html files normally (keeps hot-reload). */
+(function(){
+  try {
+    if (typeof window === 'undefined') return;
+    if (window.parent !== window) return;           // editor/preview iframe -> use sibling fetch
+    if (window.__dcChildrenRegistered) return;
+    if (!window.__dcUpdate) return;
+    window.__dcChildrenRegistered = true;
+    var DEFS = {"RangeBar":{"template":"<div style=\"width:100%;user-select:none;font-family:Inter,sans-serif;font-size:{{ rootFontSize }}\">\n  <!-- Indicator: Your Result + value + triangle -->\n  <div style=\"position:relative;height:3.4em\">\n    <div style=\"position:absolute;bottom:0;display:flex;flex-direction:column;align-items:center;gap:2px;transform:translateX(-50%);left:{{ markerLeft }}\">\n      <span style=\"white-space:nowrap;font-size:0.7em;font-weight:500;color:#000;line-height:1.3\">Your Result:</span>\n      <span style=\"white-space:nowrap;font-size:1em;font-weight:800;color:#000;line-height:1.2\">{{ value }}</span>\n      <div style=\"margin-top:0.2em;line-height:0\">\n        <svg viewBox=\"0 0 24 24.4353\" fill=\"none\" style=\"display:block;width:1em;height:1em\">\n          <path d=\"M12.9219 23.4033C12.512 24.1127 11.488 24.1127 11.0781 23.4033L1.66406 7.09667C1.25436 6.38691 1.76639 5.49999 2.58594 5.49999L21.4141 5.49999C22.2336 5.49999 22.7456 6.38691 22.3359 7.09667L12.9219 23.4033Z\" fill=\"#3E424F\" stroke=\"#FBFBFB\" stroke-width=\"0.8\"></path>\n        </svg>\n      </div>\n    </div>\n  </div>\n\n  <!-- Pill bar -->\n  <div style=\"display:flex;width:100%;height:1.3em;border-radius:100px;overflow:hidden\">\n    <sc-for list=\"{{ segs }}\" as=\"seg\" hint-placeholder-count=\"3\">\n      <div style=\"height:100%;flex-shrink:0;width:{{ seg.widthCss }};background:{{ seg.color }};border-right:{{ seg.border }}\"></div>\n    </sc-for>\n  </div>\n\n  <!-- Labels -->\n  <div style=\"margin-top:0.35em\">\n    <div style=\"display:flex;width:100%;height:1.1em\">\n      <sc-for list=\"{{ segs }}\" as=\"seg\" hint-placeholder-count=\"3\">\n        <div style=\"display:flex;align-items:center;justify-content:center;flex-shrink:0;width:{{ seg.widthCss }}\">\n          <span style=\"text-align:center;font-size:0.75em;font-weight:600;color:#000;line-height:1.2;white-space:nowrap\">{{ seg.label }}</span>\n        </div>\n      </sc-for>\n    </div>\n    <div style=\"position:relative;width:100%;height:1em;margin-top:0.15em\">\n      <sc-for list=\"{{ thresholds }}\" as=\"t\" hint-placeholder-count=\"2\">\n        <span style=\"position:absolute;top:0;text-align:center;transform:translateX(-50%);font-size:0.7em;font-weight:500;color:#000;line-height:1.2;white-space:nowrap;left:{{ t.leftCss }}\">{{ t.value }}</span>\n      </sc-for>\n    </div>\n  </div>\n</div>","js":"class Component extends DCLogic {\n  renderVals() {\n    const DEFAULT_SEGMENTS = [\n      { label: 'Low', color: '#CA313F', widthPct: 12, endValue: '0.4' },\n      { label: 'Normal', color: '#4B9C2F', widthPct: 48, endValue: '4.5' },\n      { label: 'High', color: '#F7DE6F', widthPct: 25, endValue: '10' },\n      { label: 'Very High', color: '#CA313F', widthPct: 15 },\n    ];\n    const segments = (this.props.segments && this.props.segments.length) ? this.props.segments : DEFAULT_SEGMENTS;\n    const markerPct = this.props.markerPct ?? 58;\n    const n = segments.length;\n    const segs = segments.map((s, i) => ({\n      label: s.label,\n      color: s.color,\n      widthCss: s.widthPct + '%',\n      border: i < n - 1 ? '1.5px solid white' : 'none',\n    }));\n    let cum = 0;\n    const thresholds = [];\n    segments.forEach((s) => {\n      cum += s.widthPct;\n      if (s.endValue) thresholds.push({ value: s.endValue, leftCss: cum + '%' });\n    });\n    const clamped = Math.min(Math.max(markerPct, 4), 96);\n    return {\n      value: this.props.value || '7.0 mIU/L',\n      segs,\n      thresholds,\n      markerLeft: clamped + '%',\n      rootFontSize: this.props.large ? '21px' : '15px',\n    };\n  }\n}"},"LabGenieChat":{"template":"<div style=\"display:flex;flex-direction:column;height:100%;background:#fff;font-family:Inter,sans-serif\">\n  <!-- Header -->\n  <div style=\"flex-shrink:0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #DAE0EE;min-height:56px\">\n    <div style=\"display:flex;align-items:center;gap:8px\">\n      <div style=\"display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0;width:28px;height:28px;background:var(--accent,#016ab3)\">\n        <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M19 2H5C3.9 2 3 2.9 3 4V18C3 19.1 3.9 20 5 20H9L11.29 22.29C11.68 22.68 12.31 22.68 12.7 22.29L15 20H19C20.1 20 21 19.1 21 18V4C21 2.9 20.1 2 19 2ZM13.88 12.88L12 17L10.12 12.88L6 11L10.12 9.12L12 5L13.88 9.12L18 11L13.88 12.88Z\" fill=\"white\"></path></svg>\n      </div>\n      <span style=\"font-size:18px;font-weight:700;color:#25282A\">Ask LabGenie</span>\n    </div>\n    <sc-if value=\"{{ showChooseAnother }}\" hint-placeholder-val=\"{{ true }}\">\n      <button onClick=\"{{ chooseAnother }}\" style=\"background:none;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:500;color:var(--accent,#016ab3)\" style-hover=\"opacity:0.7\">Choose another topic →</button>\n    </sc-if>\n    <sc-if value=\"{{ showClose }}\" hint-placeholder-val=\"{{ false }}\">\n      <button onClick=\"{{ onClose }}\" style=\"background:none;border:none;cursor:pointer;padding:4px;border-radius:6px;color:#25282A\" style-hover=\"background:#f3f4f6\">\n        <svg width=\"20\" height=\"20\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\"></path></svg>\n      </button>\n    </sc-if>\n  </div>\n\n  <!-- Content -->\n  <div style=\"flex:1;overflow-y:auto;padding:20px 16px;min-height:0\">\n\n    <!-- DEFAULT -->\n    <sc-if value=\"{{ isDefault }}\" hint-placeholder-val=\"{{ true }}\">\n      <div style=\"border-radius:12px;padding:16px;margin-bottom:20px;background:#F2F5F8\">\n        <p style=\"font-size:15px;font-weight:500;color:#1A1A1A;line-height:22px\">{{ greeting }}</p>\n      </div>\n      <div style=\"display:flex;flex-direction:column;gap:8px\">\n        <sc-for list=\"{{ chipButtons }}\" as=\"chip\" hint-placeholder-count=\"4\">\n          <button onClick=\"{{ chip.onClick }}\" style=\"width:100%;text-align:left;border-radius:12px;padding:12px 16px;background:#fff;border:1px solid #D6E8F2;cursor:pointer;font-family:Inter,sans-serif;font-size:15px;font-weight:500;color:#25282A;line-height:22px;transition:background .15s,border-color .15s\" style-hover=\"background:#F0F7FA;border-color:#B8DBF0\">{{ chip.text }}</button>\n        </sc-for>\n      </div>\n      <p style=\"text-align:center;margin-top:16px;font-size:13px;font-weight:500;color:#9CA3AF\">{{ hint }}</p>\n    </sc-if>\n\n    <!-- CHIP / FOLLOWUP -->\n    <sc-if value=\"{{ notDefault }}\" hint-placeholder-val=\"{{ false }}\">\n      <div style=\"width:100%;border-radius:12px;padding:12px 16px;margin-bottom:12px;background:var(--accent,#016ab3)\">\n        <span style=\"font-size:15px;font-weight:500;color:#fff;line-height:22px\">{{ activeChipText }}</span>\n      </div>\n      <div style=\"border-radius:12px;padding:16px;margin-bottom:16px;background:#F2F5F8\">\n        <p style=\"font-size:15px;font-weight:500;color:#1A1A1A;line-height:22px\">{{ activeResponse }}</p>\n      </div>\n\n      <sc-if value=\"{{ modeChip }}\" hint-placeholder-val=\"{{ false }}\">\n        <sc-if value=\"{{ showRelatedLabel }}\" hint-placeholder-val=\"{{ false }}\">\n          <p style=\"margin-bottom:8px;font-size:13px;font-weight:500;color:#9CA3AF\">Related questions:</p>\n        </sc-if>\n        <div style=\"display:flex;flex-direction:column;gap:8px\">\n          <sc-for list=\"{{ followupButtons }}\" as=\"fu\" hint-placeholder-count=\"3\">\n            <button onClick=\"{{ fu.onClick }}\" style=\"width:100%;text-align:left;border-radius:12px;padding:12px 16px;background:#EBF5FA;border:1px solid #B8DBF0;cursor:pointer;font-family:Inter,sans-serif;font-size:15px;font-weight:500;color:var(--accent,#016ab3);line-height:22px\" style-hover=\"opacity:0.8\">{{ fu.text }}</button>\n          </sc-for>\n        </div>\n      </sc-if>\n\n      <sc-if value=\"{{ hasFollowup }}\" hint-placeholder-val=\"{{ false }}\">\n        <div style=\"width:100%;border-radius:12px;padding:12px 16px;margin-bottom:12px;background:var(--accent,#016ab3)\">\n          <span style=\"font-size:15px;font-weight:500;color:#fff;line-height:22px\">{{ followupText }}</span>\n        </div>\n        <div style=\"border-radius:12px;padding:16px;background:#F2F5F8\">\n          <p style=\"font-size:15px;font-weight:500;color:#1A1A1A;line-height:22px\">{{ followupResponse }}</p>\n          <p style=\"margin-top:12px;font-size:15px;font-weight:500;color:#1A1A1A;line-height:22px;font-style:italic\">{{ followupHandoff }}</p>\n        </div>\n        <button onClick=\"{{ backToRelated }}\" style=\"display:block;margin-top:12px;background:none;border:none;padding:0;cursor:pointer;font-family:Inter,sans-serif;font-size:13px;font-weight:500;color:var(--accent,#016ab3)\" style-hover=\"opacity:0.7\">← Back to related questions</button>\n      </sc-if>\n    </sc-if>\n  </div>\n</div>","js":"class Component extends DCLogic {\n  state = { mode: 'default', chipIdx: 0, followupIdx: 0 };\n\n  renderVals() {\n    const chips = this.props.chips || [];\n    const { mode, chipIdx, followupIdx } = this.state;\n    const isDefault = mode === 'default';\n    const activeChip = !isDefault ? chips[chipIdx] : null;\n    const activeFollowup =\n      mode === 'followup' && activeChip ? (activeChip.followups || [])[followupIdx] : null;\n\n    return {\n      greeting: this.props.greeting || \"Hi, James. I'm LabGenie, your lab results companion. How can I help you today?\",\n      hint: this.props.hint || 'Select a topic above to learn more about your results.',\n      isDefault,\n      notDefault: !isDefault,\n      showClose: isDefault && !!this.props.closeable,\n      showChooseAnother: !isDefault,\n      chipButtons: isDefault\n        ? chips.map((c, i) => ({ text: c.text, onClick: () => this.setState({ mode: 'chip', chipIdx: i }) }))\n        : [],\n      activeChipText: activeChip ? activeChip.text : '',\n      activeResponse: activeChip ? activeChip.response : '',\n      modeChip: mode === 'chip',\n      showRelatedLabel: activeChip ? !!activeChip.showRelatedLabel : false,\n      followupButtons:\n        mode === 'chip' && activeChip\n          ? (activeChip.followups || []).map((f, j) => ({\n              text: f.text,\n              onClick: () => this.setState({ mode: 'followup', followupIdx: j }),\n            }))\n          : [],\n      hasFollowup: !!activeFollowup,\n      followupText: activeFollowup ? activeFollowup.text : '',\n      followupResponse: activeFollowup ? activeFollowup.response : '',\n      followupHandoff: activeFollowup ? activeFollowup.handoff : '',\n      chooseAnother: () => this.setState({ mode: 'default' }),\n      backToRelated: () => this.setState({ mode: 'chip' }),\n      onClose: this.props.onClose || (() => {}),\n    };\n  }\n}"}};
+    Object.keys(DEFS).forEach(function(name){
+      try {
+        window.__dcUpdate(name, 'html', DEFS[name].template, false);
+        window.__dcUpdate(name, 'js', DEFS[name].js, false);
+        if (window.__dcRegistry && window.__dcRegistry[name]) window.__dcRegistry[name].fetched = true;
+      } catch (e) { console.error('[self-contained] register failed for ' + name, e); }
+    });
+  } catch (e) { console.error('[self-contained] child DC registration error', e); }
+})();
+
+class Component extends DCLogic {
+  state = {
+    authed: false,
+    email: '',
+    password: '',
+    page: 'dashboard',
+    savedSteps: [false, false, false],
+    savedQ: [false, false, false],
+    checkedSteps: {},
+    checkedQ: {},
+    trend: {},
+    panelDesc: {},
+    recentChat: false,
+    pastVisit: null,
+  };
+
+  componentDidMount() {
+    this._applyRowDividers = () => {
+      const root = document.getElementById('dc-root');
+      if (!root) return;
+      root.querySelectorAll('[data-labgrid]').forEach((grid) => {
+        if (getComputedStyle(grid).position === 'static') grid.style.position = 'relative';
+        // clear previously drawn lines
+        Array.prototype.slice.call(grid.querySelectorAll(':scope > [data-rowline]')).forEach((l) => l.remove());
+        const cards = Array.prototype.slice.call(grid.querySelectorAll(':scope > [data-labcard]'));
+        if (cards.length < 2) return;
+        const gridRect = grid.getBoundingClientRect();
+        // group cards into rows by their top position
+        const rows = [];
+        cards.forEach((c) => {
+          const top = Math.round(c.getBoundingClientRect().top);
+          let row = rows.find((r) => Math.abs(r.top - top) < 4);
+          if (!row) { row = { top, cards: [] }; rows.push(row); }
+          row.cards.push(c);
+        });
+        rows.sort((a, b) => a.top - b.top);
+        // draw a full-width line centered in the gap above every row after the first
+        for (let i = 1; i < rows.length; i++) {
+          const y = (rows[i].top - gridRect.top) - 16; // row-gap is 32, center the line
+          const line = document.createElement('div');
+          line.setAttribute('data-rowline', '');
+          line.style.cssText = 'position:absolute;left:24px;right:24px;height:1px;background:#E5EAF0;pointer-events:none;top:' + y + 'px';
+          grid.appendChild(line);
+        }
+      });
+    };
+    this._onResize = () => { this._scheduleDividers(); };
+    this._scheduleDividers = () => {
+      window.requestAnimationFrame(this._applyRowDividers);
+      [120, 350, 700].forEach((d) => setTimeout(this._applyRowDividers, d));
+    };
+    window.addEventListener('resize', this._onResize);
+    this._scheduleDividers();
+  }
+
+  componentDidUpdate() {
+    if (this._scheduleDividers) this._scheduleDividers();
+  }
+
+  componentWillUnmount() {
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+  }
+
+  NEXT_STEPS_LONG = [
+    'Watch for changes in swelling, tiredness, or nausea between now and your visit. If any of these feel like they are getting worse, reach out to your care team before your next scheduled appointment.',
+    'Ask your care team whether your current medications and diet are still a good fit. Some adjustments may be worth discussing given these kidney results.',
+    'Ask when your kidney results should be rechecked. Knowing the follow-up timeline will help you stay on top of how your kidneys are doing.',
+  ];
+  NEXT_STEPS_SHORT = [
+    'Watch for changes in swelling, tiredness, or nausea between now and your visit.',
+    'Ask your care team whether your current medications and diet are still a good fit.',
+    'Ask when your kidney results should be rechecked.',
+  ];
+  QUESTIONS = [
+    'Are my kidney results stable, or do they need closer attention?',
+    'Could my swelling and fatigue be related to these results?',
+    'What should I watch for at home that would mean I need to reach out sooner?',
+  ];
+
+  buildSeg = (min, max, bounds) => {
+    const total = max - min;
+    let prev = min;
+    return bounds.map((b, i) => {
+      const seg = { label: b.label, color: b.color, widthPct: ((b.upTo - prev) / total) * 100 };
+      if (i < bounds.length - 1) seg.endValue = String(b.upTo);
+      prev = b.upTo;
+      return seg;
+    });
+  };
+  mPct = (v, min, max) => ((v - min) / (max - min)) * 100;
+
+  RED = '#CA313F';
+  GRN = '#4B9C2F';
+  YEL = '#F7DE6F';
+
+  getTests() {
+    const s = this.buildSeg, m = this.mPct;
+    const tests = {
+      tsh: {
+        key: 'tsh', name: 'TSH (Thyroid Stimulating Hormone)', abnormal: true, value: '7.0 mIU/L', rangeText: '0.4 – 4.5 mIU/L',
+        desc: "TSH is a hormone from your pituitary gland that tells your thyroid how much hormone to make. Levels that are too high or too low can mean your thyroid isn't working normally.",
+        segments: s(0, 12, [{ label: 'Low', color: this.RED, upTo: 0.4 }, { label: 'Normal', color: this.GRN, upTo: 4.5 }, { label: 'High', color: this.YEL, upTo: 10 }, { label: 'Very High', color: this.RED, upTo: 12 }]),
+        markerPct: m(7, 0, 12), hasTrend: true, shortName: 'TSH',
+        trendCfg: { title: 'Thyroid-Stimulating Hormone', unit: '(TSH)', typical: 'Typical range: 0.4 – 4.5 mIU/L', recent: '7.0 mIU/L', min: 0, max: 20,
+          zones: [{ label: 'Low', color: this.RED, from: 0, to: 0.4 }, { label: 'Normal', color: this.GRN, from: 0.4, to: 4.5 }, { label: 'High', color: this.YEL, from: 4.5, to: 10 }, { label: 'Very High', color: this.RED, from: 10, to: 20 }],
+          points: [{ label: '9/2021', value: 2.1 }, { label: '3/2022', value: 1.6 }, { label: '9/2022', value: 2.9 }, { label: '3/2023', value: 2.4 }, { label: '9/2023', value: 3.4 }, { label: '3/2024', value: 2.8 }, { label: '9/2024', value: 4.6 }, { label: '3/2025', value: 7.0 }] },
+      },
+      ft4: {
+        key: 'ft4', name: 'Free T4 (Thyroxine, Free)', abnormal: true, value: '0.2 ng/dL', rangeText: '0.8 – 1.8 ng/dL',
+        desc: 'Free T4 is the main thyroid hormone available for your body to use. A lower level can mean your thyroid is producing less than your body needs.',
+        segments: s(0, 2.5, [{ label: 'Low', color: this.RED, upTo: 0.8 }, { label: 'Normal', color: this.GRN, upTo: 1.8 }, { label: 'High', color: this.YEL, upTo: 2.5 }]),
+        markerPct: m(0.2, 0, 2.5), hasTrend: false,
+        trendCfg: { title: 'Free Thyroxine', unit: '(Free T4)', typical: 'Typical range: 0.8 – 1.8 ng/dL', recent: '0.2 ng/dL', min: 0, max: 2.5,
+          zones: [{ label: 'Low', color: this.RED, from: 0, to: 0.8 }, { label: 'Normal', color: this.GRN, from: 0.8, to: 1.8 }, { label: 'High', color: this.YEL, from: 1.8, to: 2.5 }],
+          points: [{ label: '9/2021', value: 1.5 }, { label: '3/2022', value: 1.4 }, { label: '9/2022', value: 1.2 }, { label: '3/2023', value: 1.1 }, { label: '9/2023', value: 0.9 }, { label: '3/2024', value: 0.7 }, { label: '9/2024', value: 0.5 }, { label: '3/2025', value: 0.2 }] },
+      },
+      ft3: {
+        key: 'ft3', name: 'Free T3 (Triiodothyronine, Free)', abnormal: true, value: '1.8 pg/mL', rangeText: '2.3 – 4.2 pg/mL',
+        desc: "Free T3 is the active form of thyroid hormone your cells use for energy. It's often checked alongside TSH and T4 for a fuller picture of thyroid function.",
+        segments: s(0, 6, [{ label: 'Low', color: this.RED, upTo: 2.3 }, { label: 'Normal', color: this.GRN, upTo: 4.2 }, { label: 'High', color: this.YEL, upTo: 6 }]),
+        markerPct: m(1.8, 0, 6), hasTrend: false,
+      },
+      tt4: {
+        key: 'tt4', name: 'Total T4 (Thyroxine, Total)', abnormal: true, value: '3.9 µg/dL', rangeText: '4.5 – 11.2 µg/dL',
+        desc: 'Total T4 measures all of the thyroxine in your blood, both bound and free. It helps your care team understand your overall thyroid output.',
+        segments: s(0, 16, [{ label: 'Low', color: this.RED, upTo: 4.5 }, { label: 'Normal', color: this.GRN, upTo: 11.2 }, { label: 'High', color: this.YEL, upTo: 16 }]),
+        markerPct: m(3.9, 0, 16), hasTrend: false,
+      },
+      sodium: {
+        key: 'sodium', name: 'Sodium (Na)', abnormal: true, value: '132 mmol/L', rangeText: '135 – 145 mmol/L',
+        desc: 'Sodium helps control the balance of fluid in your body and supports nerve and muscle function. Levels outside the normal range can affect hydration and blood pressure.',
+        segments: s(120, 160, [{ label: 'Low', color: this.RED, upTo: 135 }, { label: 'Normal', color: this.GRN, upTo: 145 }, { label: 'High', color: this.RED, upTo: 160 }]),
+        markerPct: m(132, 120, 160), hasTrend: false,
+      },
+      potassium: {
+        key: 'potassium', name: 'Potassium (K)', abnormal: false, value: '4.4 mmol/L', rangeText: '3.5 – 5.1 mmol/L',
+        desc: 'Potassium supports heart rhythm, muscle movement, and nerve signals. Levels that are too low or too high can cause cramps, weakness, or changes in heartbeat.',
+        segments: s(2.5, 6.5, [{ label: 'Low', color: this.RED, upTo: 3.5 }, { label: 'Normal', color: this.GRN, upTo: 5.1 }, { label: 'High', color: this.RED, upTo: 6.5 }]),
+        markerPct: m(4.4, 2.5, 6.5), hasTrend: false,
+      },
+      calcium: {
+        key: 'calcium', name: 'Calcium (Ca)', abnormal: false, value: '9.4 mg/dL', rangeText: '8.6 – 10.2 mg/dL',
+        desc: 'Calcium helps build strong bones and teeth and supports muscle contractions and nerve signals. Abnormal levels can sometimes accompany thyroid or parathyroid problems.',
+        segments: s(7, 12, [{ label: 'Low', color: this.RED, upTo: 8.6 }, { label: 'Normal', color: this.GRN, upTo: 10.2 }, { label: 'High', color: this.RED, upTo: 12 }]),
+        markerPct: m(9.4, 7, 12), hasTrend: false,
+      },
+      protein: {
+        key: 'protein', name: 'Total Protein (TP)', abnormal: false, value: '7.2 g/dL', rangeText: '6.0 – 8.3 g/dL',
+        desc: 'Total protein measures the amount of protein in your blood, including albumin and globulin. Low or high levels can reflect nutrition, liver, or kidney function.',
+        segments: s(5, 10, [{ label: 'Low', color: this.RED, upTo: 6 }, { label: 'Normal', color: this.GRN, upTo: 8.3 }, { label: 'High', color: this.RED, upTo: 10 }]),
+        markerPct: m(7.2, 5, 10), hasTrend: false,
+      },
+      hdl: {
+        key: 'hdl', name: 'HDL Cholesterol (High-Density Lipoprotein)', abnormal: true, value: '38 mg/dL', rangeText: 'Above 40 mg/dL',
+        desc: "HDL is often called 'good' cholesterol because it helps move extra cholesterol out of your bloodstream. Higher levels are generally more protective for your heart.",
+        segments: s(0, 80, [{ label: 'Low', color: this.RED, upTo: 40 }, { label: 'Moderate', color: this.YEL, upTo: 60 }, { label: 'Optimal', color: this.GRN, upTo: 80 }]),
+        markerPct: m(38, 0, 80), hasTrend: false,
+      },
+      trig: {
+        key: 'trig', name: 'Triglycerides', abnormal: true, value: '210 mg/dL', rangeText: 'Below 150 mg/dL',
+        desc: 'Triglycerides are a type of fat in your blood. Higher levels can be linked to diet, activity, and how your body processes fats — and sometimes to thyroid function.',
+        segments: s(0, 400, [{ label: 'Normal', color: this.GRN, upTo: 150 }, { label: 'Borderline', color: this.YEL, upTo: 200 }, { label: 'High', color: this.RED, upTo: 400 }]),
+        markerPct: m(210, 0, 400), hasTrend: false,
+      },
+    };
+    const trendPopup = (this.props.trendStyle || 'Popup overlay') === 'Popup overlay';
+    Object.values(tests).forEach((t) => {
+      t.isNormal = !t.abnormal;
+      t.trendOpen = !!this.state.trend[t.key];
+      t.trendIsDropdown = !trendPopup;
+      t.trendIsPopup = trendPopup;
+      const openInline = t.trendOpen && !trendPopup;
+      t.trendInlineOpen = openInline;
+      t.trendLabel = openInline ? 'Hide trend over time' : ('See how ' + (t.shortName || 'this lab') + ' has changed over time');
+      t.trendBtnBg = openInline ? '#F0F7FA' : 'none';
+      t.chevronRot = openInline ? 'rotate(180deg)' : 'none';
+      t.gridSpan = (t.hasTrend && openInline) ? '1 / -1' : 'auto';
+      t.toggleTrend = () => this.setState((st) => ({ trend: { ...st.trend, [t.key]: !st.trend[t.key] } }));
+      t.trendEl = (t.hasTrend && t.trendOpen) ? this.trendEl(t.trendCfg) : null;
+    });
+    return tests;
+  }
+
+  trendEl(cfg) {
+    const R = React.createElement;
+    // Wide viewBox so the chart fills the full card width — scales to fit, never scrolls.
+    const VW = 1280, VH = 440;
+    const X0 = 150, X1 = VW - 40, Y0 = 20, Y1 = VH - 56;
+    const { min, max, points, zones } = cfg;
+    const px = (i) => X0 + (i * (X1 - X0)) / (points.length - 1);
+    const py = (v) => Y1 - ((v - min) / (max - min)) * (Y1 - Y0);
+    const els = [];
+    zones.forEach((z, i) => {
+      const SOLID = { '#CA313F': '#EF8189', '#4B9C2F': '#6DD083', '#F7DE6F': '#F6E08A' };
+      const yt = py(z.to), yb = py(z.from);
+      els.push(R('rect', { key: 'zb' + i, x: X0, y: yt, width: X1 - X0, height: yb - yt, fill: SOLID[z.color] || z.color, fillOpacity: 1 }));
+      els.push(R('text', { key: 'zl' + i, x: X0 - 16, y: (yt + yb) / 2 + 7, textAnchor: 'end', fontSize: 20, fontWeight: 700, fill: '#3e3e3e', fontFamily: 'Inter,sans-serif' }, z.label));
+    });
+    points.forEach((p, i) => {
+      els.push(R('line', { key: 'g' + i, x1: px(i), y1: Y0, x2: px(i), y2: Y1, stroke: '#000', strokeOpacity: 0.12 }));
+      els.push(R('text', { key: 'm' + i, x: px(i), y: Y1 + 32, textAnchor: 'middle', fontSize: 18, fontWeight: 700, fill: '#000', fontFamily: 'Inter,sans-serif' }, p.label));
+    });
+    els.push(R('rect', { key: 'plotb', x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0, fill: 'none', stroke: '#000', strokeOpacity: 0.25 }));
+    const ptsStr = points.map((p, i) => px(i) + ',' + py(p.value)).join(' ');
+    els.push(R('polyline', { key: 'pl', points: ptsStr, fill: 'none', stroke: '#1A1A1A', strokeWidth: 3.5, strokeLinejoin: 'round', strokeLinecap: 'round' }));
+    points.forEach((p, i) => {
+      const last = i === points.length - 1;
+      els.push(R('circle', { key: 'd' + i, cx: px(i), cy: py(p.value), r: last ? 10 : 7, fill: last ? 'var(--accent,#016ab3)' : '#1A1A1A', stroke: '#fff', strokeWidth: last ? 3 : 2.5 }));
+    });
+    const li = points.length - 1;
+    const cx = px(li), cy = py(points[li].value);
+    const cw = 250, ch = 70;
+    const bx = Math.min(X1 - cw, Math.max(X0, cx - cw - 18)), by = Math.max(Y0 + 4, cy - ch - 18);
+    els.push(R('rect', { key: 'cob', x: bx, y: by, width: cw, height: ch, rx: 12, fill: '#fff', stroke: 'var(--accent,#016ab3)', strokeWidth: 1.5 }));
+    els.push(R('text', { key: 'col1', x: bx + cw / 2, y: by + 28, textAnchor: 'middle', fontSize: 17, fontWeight: 500, fill: '#3e3e3e', fontFamily: 'Inter,sans-serif' }, 'Your most recent result'));
+    els.push(R('text', { key: 'col2', x: bx + cw / 2, y: by + 55, textAnchor: 'middle', fontSize: 26, fontWeight: 800, fill: '#111', fontFamily: 'Inter,sans-serif' }, cfg.recent));
+
+    return R('div', { style: { background: '#fbfbfb', border: '0.5px solid #b6b6b6', borderRadius: 10, padding: '30px 32px' } }, [
+      R('p', { key: 't', style: { margin: 0, fontSize: 26, fontFamily: 'Inter,sans-serif' } }, [
+        R('span', { key: 'a', style: { fontWeight: 700, color: '#3e3e3e' } }, cfg.title),
+        R('span', { key: 'b', style: { fontWeight: 500, color: '#3e3e3e' } }, ' ' + cfg.unit),
+      ]),
+      R('p', { key: 'c', style: { margin: '12px 0 24px', fontSize: 18, fontWeight: 500, color: '#3e3e3e' } }, cfg.typical),
+      R('svg', { key: 's', viewBox: '0 0 ' + VW + ' ' + VH, style: { width: '100%', height: 'auto', display: 'block' }, fill: 'none', role: 'img' }, els),
+    ]);
+  }
+
+  bgDecoEl() {
+    const R = React.createElement;
+    const style = this.props.bgStyle || 'Soft glow';
+    if (style === 'Clean white') return null;
+    if (style === 'Subtle grid') {
+      return R('div', { style: { position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, backgroundImage: 'linear-gradient(rgba(0,0,0,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.035) 1px,transparent 1px)', backgroundSize: '44px 44px' } });
+    }
+    return R('div', { style: { position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden', zIndex: 0 } }, [
+      R('div', { key: 'glow', style: { position: 'absolute', width: 832, height: 854, left: -74, top: 'calc(100% - 400px)', background: 'radial-gradient(ellipse at center, rgba(142,214,242,0.3) 0%, rgba(18,90,172,0.15) 60%, transparent 80%)', filter: 'blur(80px)' } }),
+      R('div', { key: 'wave', style: { position: 'absolute', bottom: 0, left: 0, right: 0, height: 200, overflow: 'hidden' } },
+        R('svg', { style: { position: 'absolute', bottom: 0, left: -88, width: 1610, height: 200 }, fill: 'none', preserveAspectRatio: 'none', viewBox: '0 0 1610 200' }, [
+          R('path', { key: 'p', d: 'M72 80L126.7 92C145.8 96 166.1 95.7 185.1 89.8L333.9 44C353.4 38 374.4 38.1 393.9 44.3L527 87C557.6 97 591 91.5 616.9 72.4L743.6 -21C769.9 -40.5 804.1 -45.8 835.1 -35.3L974.1 12C989.4 17.2 1005.7 18.6 1021.7 16L1196.2 -11C1215.9 -14 1236 -11.2 1254 -2.8L1415.9 73C1442.1 85.2 1472.4 85.5 1498.9 73.7L1545 53V200H72V80Z', fill: 'url(#waveGradX)', fillOpacity: 0.5 }),
+          R('defs', { key: 'd' }, R('linearGradient', { id: 'waveGradX', x1: 72, x2: 72, y1: 83, y2: 200, gradientUnits: 'userSpaceOnUse' }, [
+            R('stop', { key: 0, stopColor: '#0D4EA2', stopOpacity: 0.4 }),
+            R('stop', { key: 1, offset: 1, stopColor: '#F4FCFF' }),
+          ])),
+        ])
+      ),
+    ]);
+  }
+
+  toggleStep = (i) => this.setState((s) => { const a = s.savedSteps.slice(); a[i] = !a[i]; return { savedSteps: a }; });
+  toggleQ = (i) => this.setState((s) => { const a = s.savedQ.slice(); a[i] = !a[i]; return { savedQ: a }; });
+
+  rowStyleFor(saved, base) {
+    return { ...base, border: '1px solid ' + (saved ? '#B8DBF0' : 'transparent'), background: saved ? '#EBF5FA' : 'transparent' };
+  }
+
+  // ── chat data ──
+  dashChips() {
+    const reach = { text: 'How do I reach my care team?', response: "Most care teams have a nurse line, a patient portal message, or an on-call provider you can reach outside of regular appointments. If you're not sure what options are available to you, asking at your next visit is a great time to find out.", handoff: 'Your care team can tell you the best way to reach them at your next visit.' };
+    const worse = { text: 'How do I know if something is getting worse?', response: 'Swelling that is spreading or getting worse, nausea that is making it hard to eat or drink, or fatigue that feels heavier than your usual are all things worth mentioning sooner rather than later.', handoff: 'When in doubt, reaching out to your care team is always the right call.' };
+    return [
+      { text: 'Can you help me understand my results?', response: 'Which results would you like me to explain? Here are the results from your current visit.', showRelatedLabel: true, followups: [
+        { text: 'TSH', response: 'Your TSH result of 7.0 mIU/L is higher than the normal range. TSH is a hormone that tells your thyroid how hard to work. When it is elevated, it can sometimes mean your thyroid is working less effectively than it should.', handoff: 'Your care team will be able to go into more detail at your next visit.' },
+        { text: 'Free T4', response: 'Free T4 and TSH provide different pieces of information about thyroid health. Looking at these tests together can help your care team determine whether any follow-up or additional monitoring may be needed.', handoff: 'Your care team will be able to go into more detail at your next visit.' },
+        { text: 'HDL Cholesterol', response: "Your HDL cholesterol of 38 mg/dL is lower than the recommended level. HDL is often called 'good cholesterol' — it helps move cholesterol out of your arteries. A lower number means there is less of this protective effect.", handoff: 'Your care team will be able to go into more detail at your next visit.' },
+      ] },
+      { text: 'What should I watch for between visits?', response: "Between now and your next visit, it's helpful to pay attention to how you're feeling day to day — things like unusual tiredness, new or worsening swelling in your legs or feet, nausea, or changes in how much you're eating or drinking.", showRelatedLabel: false, followups: [
+        { text: "How do I track how I'm feeling?", response: 'You do not need anything formal — even a brief note on your phone or a piece of paper noting when symptoms feel better or worse can be useful. Patterns over a few days or weeks give your care team more to work with.', handoff: 'Bringing even informal notes to your next visit gives your care team more to work with.' },
+        worse,
+      ] },
+      { text: 'When should I call my care team before my next appointment?', response: "If anything feels noticeably worse before your scheduled visit — a lot more swelling, feeling very short of breath, nausea that won't go away, or feeling unusually confused — it's worth reaching out to your care team.", showRelatedLabel: false, followups: [reach] },
+      { text: 'How can I prepare for my visit?', response: 'Going in with a sense of what you want to ask makes the time you have with your care team more useful for both of you. The main panel already has a few questions ready to bring.', showRelatedLabel: false, followups: [
+        { text: 'What if I forget what to ask?', response: 'Writing down or printing out your questions before the visit is one of the most straightforward ways to make sure nothing slips your mind in the moment.', handoff: 'The questions in the panel are ready for you to save and bring with you.' },
+        reach,
+      ] },
+    ];
+  }
+
+  recentChips() {
+    return [
+      { text: 'What do my results tell me about my thyroid?', response: 'Your thyroid results from May 28, 2026 show that all four thyroid markers are outside the standard range. Your TSH came back at 7.0 mIU/L, which is higher than usual. Your Free T4 came back at 0.2 ng/dL, which is lower than usual. Your Free T3 and Total T4 also came back outside the standard range. Together, this pattern is something your care team will want to review with you soon.', showRelatedLabel: false, followups: [
+        { text: 'What changes at home should I watch for?', response: 'Things worth noticing day-to-day include unusual tiredness or low energy, feeling colder than usual, unexplained weight changes, dry skin or hair, feeling slower or more forgetful than normal, or changes in mood.', handoff: 'At your next visit, ask your care team which specific changes they would like you to track.' },
+        { text: 'How do my thyroid results connect to my other results?', response: 'Thyroid hormones affect many systems in the body, which is why your care team looks at your cholesterol and blood chemistry results alongside your thyroid results. When thyroid levels are lower than usual, it can affect how the body processes fats.', handoff: 'Your care team will be able to explain how your specific results fit together at your next visit.' },
+        { text: 'What does my thyroid trend look like?', response: 'Seeing how your TSH and Free T4 have changed across previous visits helps your care team understand whether this pattern is new or has been building over time. You can view the trend below the TSH and Free T4 results.', handoff: 'Tracking these over time is particularly useful when your care team is deciding on next steps.' },
+      ] },
+      { text: 'What do my results tell me about my heart and cholesterol?', response: 'Your cholesterol results show that two markers are outside the standard range. Your HDL came back at 38 mg/dL, which is below the recommended level. Your triglycerides also came back above the standard range. Thyroid function and cholesterol are connected — when the thyroid is underactive, it can affect how the body processes fats.', showRelatedLabel: false, followups: [
+        { text: 'What lifestyle habits are connected to heart health?', response: 'Several everyday habits are connected to heart health over time — eating fewer foods high in saturated fat and salt, staying physically active, not smoking, and keeping blood pressure and blood sugar well managed.', handoff: 'Ask your care team which habits they think matter most for your situation right now.' },
+        { text: 'What does my cholesterol trend look like?', response: 'Seeing how your HDL and triglycerides have changed across visits helps your care team understand whether this pattern is new or has been building. Because cholesterol and thyroid results can move together, tracking both gives a fuller picture.', handoff: 'You can view how your results have changed in the Detailed Results section.' },
+      ] },
+      { text: 'What do my results tell me about my kidneys?', response: 'Your kidney-related results show a few things your care team will want to keep an eye on. Together they suggest your kidneys may be working a bit harder than usual right now. Your care team will be able to walk through what this means for you specifically.', showRelatedLabel: false, followups: [] },
+    ];
+  }
+
+  pastChips() {
+    return [
+      { text: 'How have my results changed since last time?', response: 'Comparing your March 2025 results to September 2024, your TSH has increased from normal to above range, and your Free T4 has decreased. Your HDL and triglycerides also moved out of the normal range. Meanwhile, your CMP tests have remained stable within the normal range.', showRelatedLabel: false, followups: [] },
+      { text: 'Which results have improved?', response: 'Your CMP tests (Potassium, Calcium, and Total Protein) have all remained stable and within the normal range across both visits. This consistency is a positive sign that your metabolic function is stable.', showRelatedLabel: false, followups: [] },
+      { text: 'What changes should I tell my doctor about?', response: 'The most significant changes to discuss are: your TSH rising into the abnormal range, your Free T4 dropping below normal, and your lipid panel (HDL and triglycerides) moving out of range.', showRelatedLabel: false, followups: [] },
+      { text: 'What does this pattern mean over time?', response: 'The pattern shows your thyroid function declining between September 2024 and March 2025. When TSH rises and Free T4 falls together, it typically means your thyroid gland is working harder but producing less hormone.', showRelatedLabel: false, followups: [] },
+    ];
+  }
+
+  visits() {
+    const ab = { bg: '#FDECEC', color: '#CA313F', border: '#F3C3C3' };
+    const am = { bg: '#FEF3DA', color: '#B45309', border: '#F0D58A' };
+    const ok = { bg: '#E8F6EE', color: '#1F8A4C', border: '#BEE6CD' };
+    const pill = { High: { bg: '#FDECEC', color: '#CA313F' }, Low: { bg: '#FDECEC', color: '#CA313F' }, Borderline: { bg: '#FEF3DA', color: '#B45309' }, Normal: { bg: '#EEF3F1', color: '#1F8A4C' } };
+    const mk = (tests) => tests.map((t) => ({ name: t.name, value: t.value, range: t.range, status: t.status, pillBg: pill[t.status].bg, pillColor: pill[t.status].color }));
+
+    return [
+      {
+        id: 'v2026', day: '28', mon: 'May', date: 'May 28, 2026',
+        doctor: 'Dr. Elena Marsh', specialty: 'Endocrinology',
+        panelsText: 'Thyroid Panel · Lipid Panel · Comprehensive Metabolic Panel',
+        severity: 'abnormal',
+        tests: mk([
+          { name: 'TSH (Thyroid Stimulating Hormone)', value: '7.0 mIU/L', range: '0.4 – 4.5 mIU/L', status: 'High' },
+          { name: 'Free T4 (Thyroxine, Free)', value: '0.2 ng/dL', range: '0.8 – 1.8 ng/dL', status: 'Low' },
+          { name: 'Free T3 (Triiodothyronine, Free)', value: '1.8 pg/mL', range: '2.3 – 4.2 pg/mL', status: 'Low' },
+          { name: 'Total T4 (Thyroxine, Total)', value: '3.9 µg/dL', range: '4.5 – 11.2 µg/dL', status: 'Low' },
+          { name: 'HDL Cholesterol', value: '38 mg/dL', range: 'Above 40 mg/dL', status: 'Low' },
+          { name: 'Triglycerides', value: '210 mg/dL', range: 'Below 150 mg/dL', status: 'High' },
+          { name: 'Sodium (Na)', value: '132 mmol/L', range: '135 – 145 mmol/L', status: 'Low' },
+          { name: 'Potassium (K)', value: '4.4 mmol/L', range: '3.5 – 5.1 mmol/L', status: 'Normal' },
+          { name: 'Calcium (Ca)', value: '9.4 mg/dL', range: '8.6 – 10.2 mg/dL', status: 'Normal' },
+          { name: 'Total Protein (TP)', value: '7.2 g/dL', range: '6.0 – 8.3 g/dL', status: 'Normal' },
+        ]),
+      },
+      {
+        id: 'v2025b', day: '14', mon: 'Sep', date: 'September 14, 2025',
+        doctor: 'Dr. Elena Marsh', specialty: 'Endocrinology',
+        panelsText: 'Thyroid Panel · Lipid Panel',
+        severity: 'abnormal',
+        tests: mk([
+          { name: 'TSH (Thyroid Stimulating Hormone)', value: '4.6 mIU/L', range: '0.4 – 4.5 mIU/L', status: 'High' },
+          { name: 'Free T4 (Thyroxine, Free)', value: '0.5 ng/dL', range: '0.8 – 1.8 ng/dL', status: 'Low' },
+          { name: 'HDL Cholesterol', value: '40 mg/dL', range: 'Above 40 mg/dL', status: 'Borderline' },
+          { name: 'Triglycerides', value: '165 mg/dL', range: 'Below 150 mg/dL', status: 'Borderline' },
+        ]),
+      },
+      {
+        id: 'v2025a', day: '14', mon: 'Mar', date: 'March 14, 2025',
+        doctor: 'Dr. Priya Nadkarni', specialty: 'Primary Care',
+        panelsText: 'Thyroid Panel · Comprehensive Metabolic Panel',
+        severity: 'amber',
+        tests: mk([
+          { name: 'TSH (Thyroid Stimulating Hormone)', value: '2.8 mIU/L', range: '0.4 – 4.5 mIU/L', status: 'Normal' },
+          { name: 'Free T4 (Thyroxine, Free)', value: '0.9 ng/dL', range: '0.8 – 1.8 ng/dL', status: 'Normal' },
+          { name: 'Triglycerides', value: '158 mg/dL', range: 'Below 150 mg/dL', status: 'Borderline' },
+          { name: 'Sodium (Na)', value: '139 mmol/L', range: '135 – 145 mmol/L', status: 'Normal' },
+          { name: 'Potassium (K)', value: '4.1 mmol/L', range: '3.5 – 5.1 mmol/L', status: 'Normal' },
+          { name: 'Calcium (Ca)', value: '9.3 mg/dL', range: '8.6 – 10.2 mg/dL', status: 'Normal' },
+        ]),
+      },
+      {
+        id: 'v2024', day: '09', mon: 'Sep', date: 'September 9, 2024',
+        doctor: 'Dr. Priya Nadkarni', specialty: 'Primary Care',
+        panelsText: 'Thyroid Panel · Lipid Panel · Comprehensive Metabolic Panel',
+        severity: 'ok',
+        tests: mk([
+          { name: 'TSH (Thyroid Stimulating Hormone)', value: '2.4 mIU/L', range: '0.4 – 4.5 mIU/L', status: 'Normal' },
+          { name: 'Free T4 (Thyroxine, Free)', value: '1.1 ng/dL', range: '0.8 – 1.8 ng/dL', status: 'Normal' },
+          { name: 'HDL Cholesterol', value: '52 mg/dL', range: 'Above 40 mg/dL', status: 'Normal' },
+          { name: 'Triglycerides', value: '120 mg/dL', range: 'Below 150 mg/dL', status: 'Normal' },
+          { name: 'Sodium (Na)', value: '140 mmol/L', range: '135 – 145 mmol/L', status: 'Normal' },
+          { name: 'Potassium (K)', value: '4.0 mmol/L', range: '3.5 – 5.1 mmol/L', status: 'Normal' },
+        ]),
+      },
+    ].map((v) => {
+      const palette = v.severity === 'abnormal' ? ab : v.severity === 'amber' ? am : ok;
+      const outCount = v.tests.filter((t) => t.status === 'High' || t.status === 'Low').length;
+      const bdCount = v.tests.filter((t) => t.status === 'Borderline').length;
+      let badgeText;
+      if (outCount > 0) badgeText = outCount + ' outside standard range';
+      else if (bdCount > 0) badgeText = bdCount + ' borderline';
+      else badgeText = 'All ' + v.tests.length + ' within range';
+      return { ...v, badgeBg: palette.bg, badgeColor: palette.color, badgeBorder: palette.border, badgeText };
+    });
+  }
+
+  renderVals() {
+    const accent = this.props.accent || '#016ab3';
+    const page = this.state.page;
+    const ACT = 'var(--accent,#016ab3)';
+    const tabColor = (a) => (a ? ACT : '#25282a');
+    const tabWeight = (a) => (a ? 700 : 500);
+    const tabBar = (a) => (a ? ACT : 'transparent');
+    const savedCount = this.state.savedSteps.filter(Boolean).length + this.state.savedQ.filter(Boolean).length;
+
+    const tests = this.getTests();
+    const t = tests;
+    const pastVisits = this.visits().map((v) => ({ ...v, open: () => this.setState({ pastVisit: v.id }) }));
+    const activeVisit = this.state.pastVisit ? pastVisits.find((v) => v.id === this.state.pastVisit) : null;
+    const trendPopupMode = (this.props.trendStyle || 'Popup overlay') === 'Popup overlay';
+    const trendModalTest = trendPopupMode
+      ? Object.values(tests).find((x) => x.hasTrend && this.state.trend[x.key])
+      : null;
+
+    const nextSteps = this.NEXT_STEPS_LONG.map((text, i) => {
+      const saved = this.state.savedSteps[i];
+      return {
+        num: i + 1, text, saved, bmFill: saved ? ACT : 'none',
+        rowStyle: this.rowStyleFor(saved, { display: 'flex', alignItems: 'center', gap: '28px', padding: '16px 24px', borderRadius: '12px', cursor: 'pointer', transition: 'background .15s, border-color .15s' }),
+        rowHover: saved ? {} : { background: '#F0F7FA', borderColor: '#B8DBF0' },
+        toggle: () => this.toggleStep(i),
+      };
+    });
+    const questions = this.QUESTIONS.map((text, i) => {
+      const saved = this.state.savedQ[i];
+      return {
+        text, saved, bmFill: saved ? ACT : 'none',
+        rowStyle: { display: 'flex', alignItems: 'center', gap: '16px', padding: '12px 16px', borderRadius: '12px', border: '1px solid ' + (saved ? '#B8DBF0' : '#D6E8F2'), background: saved ? '#EBF5FA' : '#fff', transition: 'background .15s, border-color .15s' },
+        rowHover: saved ? {} : { background: '#F0F7FA', borderColor: '#B8DBF0' },
+        toggle: () => this.toggleQ(i),
+      };
+    });
+
+    const criticalTests = [t.tsh, t.hdl, t.ft4].map((x) => ({ name: x.name, value: x.value, segments: x.segments, markerPct: x.markerPct }));
+
+    const PANEL_DESC = {
+      thyroid: 'A thyroid panel measures the hormones that show how well your thyroid gland is working. Your thyroid helps control your energy, metabolism, body temperature, and weight.',
+      cmp: 'A comprehensive metabolic panel checks the salts (electrolytes), minerals, and proteins in your blood, and how well your kidneys are keeping everything in balance.',
+      lipid: 'A lipid panel measures the fats in your blood — including cholesterol and triglycerides — which relate to the health of your heart and blood vessels.',
+    };
+    const panels = [
+      { title: 'Thyroid Panel', key: 'thyroid', badge: '4 Tests', groups: [
+        { abnormal: true, label: '4 Tests outside standard range', tests: [t.tsh, t.ft4, t.ft3, t.tt4] },
+      ] },
+      { title: 'Comprehensive Metabolic Panel (CMP)', key: 'cmp', badge: '4 Tests', groups: [
+        { abnormal: true, label: '1 Test outside standard range', tests: [t.sodium] },
+        { abnormal: false, label: '3 Tests within standard range', tests: [t.potassium, t.calcium, t.protein] },
+      ] },
+      { title: 'Lipid Panel', key: 'lipid', badge: '2 Tests', groups: [
+        { abnormal: true, label: '2 Tests outside standard range', tests: [t.hdl, t.trig] },
+      ] },
+    ];
+    panels.forEach((p) => {
+      p.groups.forEach((g) => {
+        g.isAbnormal = g.abnormal; g.isNormal = !g.abnormal;
+        g.borderColor = g.abnormal ? '#CA313F' : '#28bd4b';
+        g.labelColor = g.abnormal ? '#ED4646' : '#28bd4b';
+      });
+      const ab = p.groups.filter((g) => g.abnormal).reduce((s, g) => s + g.tests.length, 0);
+      p.statusText = ab > 0 ? ('— ' + ab + (ab === 1 ? ' Test' : ' Tests') + ' outside standard range') : '— All within standard range';
+      p.statusColor = ab > 0 ? '#CA313F' : '#28BD4B';
+      p.description = PANEL_DESC[p.key];
+      p.descOpen = !!this.state.panelDesc[p.key];
+      p.descIcon = p.descOpen ? '×' : 'i';
+      p.toggleDesc = () => this.setState((st) => ({ panelDesc: { ...st.panelDesc, [p.key]: !st.panelDesc[p.key] } }));
+    });
+
+    // Prioritized layout variation: abnormal tests single-column, normal two-column,
+    // status next to title, panel description behind an info toggle.
+    const recentPanels = [
+      { title: 'Thyroid Panel', key: 'thyroid', badge: '4 Tests',
+        description: 'A thyroid panel measures the hormones that show how well your thyroid gland is working. Your thyroid helps control your energy, metabolism, body temperature, and weight.',
+        abnormalTests: [t.tsh, t.ft4, t.ft3, t.tt4], normalTests: [] },
+      { title: 'Comprehensive Metabolic Panel (CMP)', key: 'cmp', badge: '4 Tests',
+        description: 'A comprehensive metabolic panel checks the salts (electrolytes), minerals, and proteins in your blood, and how well your kidneys are keeping everything in balance.',
+        abnormalTests: [t.sodium], normalTests: [t.potassium, t.calcium, t.protein] },
+      { title: 'Lipid Panel', key: 'lipid', badge: '2 Tests',
+        description: 'A lipid panel measures the fats in your blood — including cholesterol and triglycerides — which relate to the health of your heart and blood vessels.',
+        abnormalTests: [t.hdl, t.trig], normalTests: [] },
+    ].map((p) => {
+      const n = p.abnormalTests.length;
+      const descOpen = !!this.state.panelDesc[p.key];
+      return {
+        ...p,
+        statusText: n > 0 ? ('— ' + n + (n === 1 ? ' Test' : ' Tests') + ' outside standard range') : '— All within standard range',
+        statusColor: n > 0 ? '#CA313F' : '#28BD4B',
+        hasAbnormal: n > 0,
+        hasNormal: p.normalTests.length > 0,
+        normalLabel: p.normalTests.length + (p.normalTests.length === 1 ? ' Test' : ' Tests') + ' within standard range',
+        descOpen,
+        descIcon: descOpen ? '×' : 'i',
+        toggleDesc: () => this.setState((st) => ({ panelDesc: { ...st.panelDesc, [p.key]: !st.panelDesc[p.key] } })),
+      };
+    });
+
+    // prep list
+    const checkBox = (checked) => ({ flexShrink: 0, marginTop: '2px', width: '20px', height: '20px', borderRadius: '9999px', border: '2px solid ' + (checked ? ACT : '#D1D5DB'), background: checked ? ACT : '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 });
+    const prepQuestions = [];
+    this.state.savedQ.forEach((sv, i) => {
+      if (!sv) return;
+      const idx = i;
+      const checked = !!this.state.checkedQ[idx];
+      prepQuestions.push({
+        text: this.QUESTIONS[idx], checked,
+        wrapStyle: prepQuestions.length > 0 ? { borderTop: '1px solid #E5EAF0' } : {},
+        checkStyle: checkBox(checked),
+        toggleCheck: () => this.setState((s) => ({ checkedQ: { ...s.checkedQ, [idx]: !s.checkedQ[idx] } })),
+        remove: () => this.toggleQ(idx),
+      });
+    });
+    const prepSteps = [];
+    this.state.savedSteps.forEach((sv, i) => {
+      if (!sv) return;
+      const idx = i;
+      const checked = !!this.state.checkedSteps[idx];
+      prepSteps.push({
+        text: this.NEXT_STEPS_SHORT[idx], checked, num: prepSteps.length + 1,
+        wrapStyle: prepSteps.length > 0 ? { borderTop: '1px solid #E5EAF0' } : {},
+        checkStyle: checkBox(checked),
+        toggleCheck: () => this.setState((s) => ({ checkedSteps: { ...s.checkedSteps, [idx]: !s.checkedSteps[idx] } })),
+        remove: () => this.toggleStep(idx),
+      });
+    });
+
+    return {
+      accent,
+      // auth / login
+      authed: this.state.authed,
+      notAuthed: !this.state.authed,
+      email: this.state.email,
+      password: this.state.password,
+      onEmail: (e) => this.setState({ email: e.target.value }),
+      onPassword: (e) => this.setState({ password: e.target.value }),
+      submitLogin: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ authed: true }); },
+      bgDecoEl: this.bgDecoEl(),
+      // nav
+      goDashboard: () => this.setState({ page: 'dashboard' }),
+      goRecent: () => this.setState({ page: 'recent' }),
+      goPast: () => this.setState({ page: 'past' }),
+      goPrep: () => this.setState({ page: 'prep' }),
+      isDashboard: page === 'dashboard', isRecent: page === 'recent', isPrep: page === 'prep', isPast: page === 'past',
+      dashColor: tabColor(page === 'dashboard'), dashWeight: tabWeight(page === 'dashboard'), dashBar: tabBar(page === 'dashboard'),
+      recentColor: tabColor(page === 'recent'), recentWeight: tabWeight(page === 'recent'), recentBar: tabBar(page === 'recent'),
+      pastColor: tabColor(page === 'past'), pastWeight: tabWeight(page === 'past'), pastBar: tabBar(page === 'past'),
+      savedCount,
+      showSavedBadge: savedCount > 0 && page !== 'prep',
+      bmHeaderFill: page === 'prep' ? ACT : 'none',
+      bmHeaderStroke: page === 'prep' ? ACT : '#25282A',
+      // dashboard
+      criticalTests, nextSteps, questions,
+      dashChips: this.dashChips(),
+      dashGreeting: "Hi, Sam. I'm LabGenie, your lab results companion. I'm here to help you understand your lab results and get you ready to talk with your care team. How can I help you today?",
+      dashHint: 'Select a topic above to learn more about your results.',
+      // recent
+      panels,
+      recentPanels,
+      recentStandard: (this.props.recentLayout || 'Standard') !== 'Prioritized',
+      recentPrioritized: (this.props.recentLayout || 'Standard') === 'Prioritized',
+      recentChips: this.recentChips(),
+      recentGreeting: "Hi, Sam. I can help you make sense of what you're seeing on this page. What would you like to know?",
+      recentHint: 'Select a topic to learn more about your results.',
+      recentChatOpen: this.state.recentChat, recentChatClosed: !this.state.recentChat,
+      openRecentChat: () => this.setState({ recentChat: true }),
+      closeRecentChat: () => this.setState({ recentChat: false }),
+      // trend popup overlay
+      trendModalOpen: trendModalTest != null,
+      trendModalTitle: trendModalTest ? trendModalTest.name : '',
+      trendModalEl: trendModalTest ? this.trendEl(trendModalTest.trendCfg) : null,
+      closeTrendModal: () => this.setState({ trend: {} }),
+      stopProp: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+      // prep
+      prepEmpty: savedCount === 0, prepHasItems: savedCount > 0,
+      prepHasQuestions: prepQuestions.length > 0, prepHasSteps: prepSteps.length > 0,
+      prepQuestions, prepSteps,
+      clearAll: () => this.setState({ savedSteps: [false, false, false], savedQ: [false, false, false], checkedSteps: {}, checkedQ: {} }),
+      // past
+      visits: pastVisits,
+      pastListView: !activeVisit,
+      pastDetailView: !!activeVisit,
+      activeVisit: activeVisit || { date: '', doctor: '', specialty: '', tests: [], badgeText: '', badgeBg: '#fff', badgeColor: '#000', badgeBorder: '#eee' },
+      closeVisit: () => this.setState({ pastVisit: null }),
+      printPage: () => { window.print(); },
+    };
+  }
+}
+</script>
+</body>
+</html>
