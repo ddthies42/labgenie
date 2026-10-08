@@ -5,34 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
-  <script>
-(function (m, a, z, e) {
-  var s, t, u, v;
-  try {
-    t = m.sessionStorage.getItem('maze-us');
-  } catch (err) {}
-
-  if (!t) {
-    t = new Date().getTime();
-    try {
-      m.sessionStorage.setItem('maze-us', t);
-    } catch (err) {}
-  }
-
-  u = document.currentScript || (function () {
-    var w = document.getElementsByTagName('script');
-    return w[w.length - 1];
-  })();
-  v = u && u.nonce;
-
-  s = a.createElement('script');
-  s.src = z + '?apiKey=' + e;
-  s.async = true;
-  if (v) s.setAttribute('nonce', v);
-  a.getElementsByTagName('head')[0].appendChild(s);
-  m.mazeUniversalSnippetApiKey = e;
-})(window, document, 'https://snippet.maze.co/maze-universal-loader.js', 'eaf88dcd-6fec-4c05-9f5a-4edf88ce1f34');
-</script>
 <body>
 <template id="__bundler_thumbnail">
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +21,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-<style>html,body{margin:0;padding:0}*{box-sizing:border-box}</style>
+<style>html,body{margin:0;padding:0}*{box-sizing:border-box}
+@media print{@page{margin:14mm}html,body{background:#fff!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}[data-print-root]{height:auto!important;min-width:0!important;overflow:visible!important;display:block!important}[data-print-scroll]{height:auto!important;overflow:visible!important}[data-print-hide]{display:none!important}[data-print-only]{display:block!important}[data-print-pad]{padding:0!important;max-width:none!important}}</style>
 </helmet>
 
 <sc-if value="{{ notAuthed }}" hint-placeholder-val="{{ true }}">
@@ -106,10 +79,10 @@
 </sc-if>
 
 <sc-if value="{{ authed }}" hint-placeholder-val="{{ false }}">
-<div style="--accent:{{ accent }};font-family:Inter,sans-serif;height:100vh;min-width:980px;display:flex;flex-direction:column;background:#fff;overflow:hidden">
+<div data-print-root style="--accent:{{ accent }};font-family:Inter,sans-serif;height:100vh;min-width:980px;display:flex;flex-direction:column;background:#fff;overflow:hidden">
 
   <!-- ===== HEADER ===== -->
-  <div style="height:106px;flex-shrink:0;background:#fff;border-bottom:1px solid #E5EAF0;display:flex;align-items:center;justify-content:space-between;padding:14px 40px">
+  <div data-print-hide style="height:106px;flex-shrink:0;background:#fff;border-bottom:1px solid #E5EAF0;display:flex;align-items:center;justify-content:space-between;padding:14px 40px">
     <!-- logo -->
     <div onClick="{{ goDashboard }}" title="Go to your dashboard" style="display:flex;align-items:center;gap:14px;cursor:pointer" style-hover="opacity:0.75">
       <img src="logo-icon.png" alt="LabGenie" width="48" height="48" style="display:block;width:48px;height:48px;object-fit:contain;flex-shrink:0">
@@ -156,7 +129,11 @@
   </div>
 
   <!-- ===== CONTENT ===== -->
-  <div style="flex:1;position:relative;overflow:hidden">
+  <div data-print-scroll style="flex:1;position:relative;overflow:hidden">
+    <div data-print-only style="display:none;padding-bottom:16px;margin-bottom:24px;border-bottom:2px solid #25282a">
+      <p style="margin:0;font-family:Figtree,sans-serif;font-size:22px;font-weight:800;color:#25282a">LabGenie · Lab results for Sam R.</p>
+      <p style="margin:6px 0 0;font-size:14px;font-weight:500;color:#25282a">Printed from LabGenie to bring to your care team. Ask your care team about any result you have questions on.</p>
+    </div>
 
     <!-- ========== DASHBOARD ========== -->
     <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
@@ -227,13 +204,15 @@
 
     <!-- ========== RECENT RESULTS ========== -->
     <sc-if value="{{ isRecent }}" hint-placeholder-val="{{ false }}">
-      <div style="height:100%;overflow-y:auto;position:relative">
-        {{ bgDecoEl }}
-        <div style="position:relative;z-index:1;padding:24px 48px 80px">
+      <div data-print-scroll style="height:100%;overflow-y:auto;position:relative">
+        <div data-print-hide style="display:contents">{{ bgDecoEl }}</div>
+        <div data-print-pad style="position:relative;z-index:1;padding:24px 48px 80px">
 
           <div style="background:#fff;border-radius:20px;border:1px solid #dae0ee;padding:32px;margin-bottom:24px">
-            <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap">
-              <p style="font-family:Figtree,sans-serif;font-size:32px;font-weight:700;color:#25282a">Latest results (Sept. 14, 2025)</p>
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px">
+            <div style="flex:1;min-width:0">
+            <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+              <p style="margin:0;font-family:Figtree,sans-serif;font-size:32px;font-weight:700;color:#25282a">Latest results (Sept. 14, 2025)</p>
               <div style="display:flex;gap:16px">
                 <div style="background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">3 Panels</span></div>
                 <div style="background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">10 Tests</span></div>
@@ -249,13 +228,15 @@
                 <span style="font-size:16px;font-weight:500;color:#28bd4b">3 Tests within standard range</span>
               </div>
             </div>
+            </div>
+              <button data-print-hide onClick="{{ printPage }}" aria-label="Print results" style="flex-shrink:0;display:flex;align-items:center;gap:10px;min-height:48px;padding:12px 20px;border-radius:10px;border:2px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-family:Inter,sans-serif;font-size:16px;font-weight:700;color:var(--accent,#016ab3);white-space:nowrap" style-hover="background:#F0F7FA" style-focus="outline:3px solid #9CCBEB;outline-offset:2px">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                Print results
+              </button>
+            </div>
             <div style="margin-top:28px">
               <p style="font-family:Figtree,sans-serif;font-size:26px;font-weight:700;color:#25282a">What your test results mean</p>
               <p style="margin-top:16px;font-size:18px;font-weight:500;color:#303030;line-height:26px">Your latest thyroid test results show a much larger drop in hormone levels compared to your typical range. The numbers may mean that your thyroid is not keeping up, and this may be slowing down your body's metabolism. This drop could lead to serious issues if it isn't handled soon.</p>
-              <button style="margin-top:28px;width:100%;height:48px;border-radius:100px;border:1.5px solid var(--accent,#016ab3);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px" style-hover="background:#F0F7FA">
-                <span style="font-size:16px;font-weight:700;color:var(--accent,#016ab3)">Download full results</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              </button>
             </div>
           </div>
 
@@ -267,12 +248,13 @@
                   <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0">
                     <p style="margin:0;font-family:Figtree,sans-serif;font-size:26px;font-weight:700;color:#25282a">{{ panel.title }}</p>
                     <span style="font-size:18px;font-weight:700;color:{{ panel.statusColor }}">{{ panel.statusText }}</span>
-                    <button onClick="{{ panel.toggleDesc }}" title="What is this panel?" style="flex-shrink:0;width:26px;height:26px;border-radius:9999px;border:1.5px solid #C7D2DE;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-style:italic;font-size:15px;font-weight:700;color:#6b7280;line-height:1" style-hover="background:#F0F7FA;border-color:var(--accent,#016ab3);color:var(--accent,#016ab3)">{{ panel.descIcon }}</button>
+                    <button data-print-hide onClick="{{ panel.toggleDesc }}" title="What is this panel?" style="flex-shrink:0;width:26px;height:26px;border-radius:9999px;border:1.5px solid #C7D2DE;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-style:italic;font-size:15px;font-weight:700;color:#6b7280;line-height:1" style-hover="background:#F0F7FA;border-color:var(--accent,#016ab3);color:var(--accent,#016ab3)">{{ panel.descIcon }}</button>
                   </div>
                   <div style="flex-shrink:0;background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">{{ panel.badge }}</span></div>
                 </div>
+                <p data-print-only style="display:none;margin:12px 0 16px;font-size:15px;font-weight:500;line-height:22px;color:#25282a">{{ panel.description }}</p>
                 <sc-if value="{{ panel.descOpen }}" hint-placeholder-val="{{ false }}">
-                  <div style="margin-bottom:24px;display:flex;gap:12px;align-items:flex-start;background:#F0F7FA;border:1px solid #D6E8F2;border-radius:12px;padding:16px 18px">
+                  <div data-print-hide style="margin-bottom:24px;display:flex;gap:12px;align-items:flex-start;background:#F0F7FA;border:1px solid #D6E8F2;border-radius:12px;padding:16px 18px">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="var(--accent,#016ab3)" stroke-width="2"></circle><path d="M12 11v5M12 8h.01" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round"></path></svg>
                     <p style="margin:0;font-size:16px;font-weight:500;line-height:24px;color:#25282a">{{ panel.description }}</p>
                   </div>
@@ -302,7 +284,7 @@
                               <p style="font-size:16px;font-weight:500;color:#25282a;line-height:22px">{{ test.desc }}</p>
                             </div>
                             <sc-if value="{{ test.hasTrend }}" hint-placeholder-val="{{ false }}">
-                              <button onClick="{{ test.toggleTrend }}" style="width:100%;margin-top:2px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid #D6E8F2;background:{{ test.trendBtnBg }};cursor:pointer;font-size:16px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
+                              <button data-print-hide onClick="{{ test.toggleTrend }}" style="width:100%;margin-top:2px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid #D6E8F2;background:{{ test.trendBtnBg }};cursor:pointer;font-size:16px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
                                 <span>{{ test.trendLabel }}</span>
                                 <sc-if value="{{ test.trendIsDropdown }}" hint-placeholder-val="{{ true }}">
                                   <svg width="15" height="9" viewBox="0 0 15 8.5" fill="none" style="transform:{{ test.chevronRot }}"><path d="M1 1L7.5 7.5L14 1" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -334,13 +316,14 @@
                     <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0">
                       <p style="margin:0;font-family:Figtree,sans-serif;font-size:26px;font-weight:700;color:#25282a">{{ panel.title }}</p>
                       <span style="font-size:18px;font-weight:700;color:{{ panel.statusColor }}">{{ panel.statusText }}</span>
-                      <button onClick="{{ panel.toggleDesc }}" title="What is this panel?" style="flex-shrink:0;width:26px;height:26px;border-radius:9999px;border:1.5px solid #C7D2DE;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-style:italic;font-size:15px;font-weight:700;color:#6b7280;line-height:1" style-hover="background:#F0F7FA;border-color:var(--accent,#016ab3);color:var(--accent,#016ab3)">{{ panel.descIcon }}</button>
+                      <button data-print-hide onClick="{{ panel.toggleDesc }}" title="What is this panel?" style="flex-shrink:0;width:26px;height:26px;border-radius:9999px;border:1.5px solid #C7D2DE;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-style:italic;font-size:15px;font-weight:700;color:#6b7280;line-height:1" style-hover="background:#F0F7FA;border-color:var(--accent,#016ab3);color:var(--accent,#016ab3)">{{ panel.descIcon }}</button>
                     </div>
                     <div style="flex-shrink:0;background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">{{ panel.badge }}</span></div>
                   </div>
 
-                  <sc-if value="{{ panel.descOpen }}" hint-placeholder-val="{{ false }}">
-                    <div style="margin-top:16px;display:flex;gap:12px;align-items:flex-start;background:#F0F7FA;border:1px solid #D6E8F2;border-radius:12px;padding:16px 18px">
+                  <p data-print-only style="display:none;margin:12px 0 16px;font-size:15px;font-weight:500;line-height:22px;color:#25282a">{{ panel.description }}</p>
+                <sc-if value="{{ panel.descOpen }}" hint-placeholder-val="{{ false }}">
+                    <div data-print-hide style="margin-top:16px;display:flex;gap:12px;align-items:flex-start;background:#F0F7FA;border:1px solid #D6E8F2;border-radius:12px;padding:16px 18px">
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="var(--accent,#016ab3)" stroke-width="2"></circle><path d="M12 11v5M12 8h.01" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round"></path></svg>
                       <p style="margin:0;font-size:16px;font-weight:500;line-height:24px;color:#25282a">{{ panel.description }}</p>
                     </div>
@@ -363,7 +346,7 @@
                             <p style="font-size:16px;font-weight:500;color:#25282a;line-height:24px">{{ test.desc }}</p>
                           </div>
                           <sc-if value="{{ test.hasTrend }}" hint-placeholder-val="{{ false }}">
-                            <button onClick="{{ test.toggleTrend }}" style="width:100%;margin-top:2px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid #D6E8F2;background:{{ test.trendBtnBg }};cursor:pointer;font-size:16px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
+                            <button data-print-hide onClick="{{ test.toggleTrend }}" style="width:100%;margin-top:2px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid #D6E8F2;background:{{ test.trendBtnBg }};cursor:pointer;font-size:16px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
                               <span>{{ test.trendLabel }}</span>
                               <sc-if value="{{ test.trendIsDropdown }}" hint-placeholder-val="{{ true }}">
                                 <svg width="15" height="9" viewBox="0 0 15 8.5" fill="none" style="transform:{{ test.chevronRot }}"><path d="M1 1L7.5 7.5L14 1" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -410,7 +393,7 @@
       </div>
 
       <sc-if value="{{ trendModalOpen }}" hint-placeholder-val="{{ false }}">
-        <div onClick="{{ closeTrendModal }}" style="position:fixed;inset:0;background:rgba(20,28,46,0.55);z-index:200;display:flex;align-items:center;justify-content:center;padding:40px">
+        <div data-print-hide onClick="{{ closeTrendModal }}" style="position:fixed;inset:0;background:rgba(20,28,46,0.55);z-index:200;display:flex;align-items:center;justify-content:center;padding:40px">
           <div onClick="{{ stopProp }}" style="background:#fff;border-radius:18px;width:100%;max-width:1180px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.32)">
             <div style="position:sticky;top:0;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;border-bottom:1px solid #E5EAF0;border-radius:18px 18px 0 0">
               <div style="display:flex;align-items:center;gap:12px">
@@ -427,13 +410,13 @@
       </sc-if>
 
       <sc-if value="{{ recentChatClosed }}" hint-placeholder-val="{{ true }}">
-        <button onClick="{{ openRecentChat }}" style="position:fixed;bottom:32px;right:32px;display:flex;align-items:center;gap:12px;padding:16px 24px;border-radius:9999px;background:var(--accent,#016ab3);border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.18);z-index:50" style-hover="opacity:0.92">
+        <button data-print-hide onClick="{{ openRecentChat }}" style="position:fixed;bottom:32px;right:32px;display:flex;align-items:center;gap:12px;padding:16px 24px;border-radius:9999px;background:var(--accent,#016ab3);border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.18);z-index:50" style-hover="opacity:0.92">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 2H5C3.9 2 3 2.9 3 4V18C3 19.1 3.9 20 5 20H9L11.29 22.29C11.68 22.68 12.31 22.68 12.7 22.29L15 20H19C20.1 20 21 19.1 21 18V4C21 2.9 20.1 2 19 2ZM13.88 12.88L12 17L10.12 12.88L6 11L10.12 9.12L12 5L13.88 9.12L18 11L13.88 12.88Z" fill="white"></path></svg>
           <span style="font-size:16px;font-weight:700;color:#fff">Ask LabGenie</span>
         </button>
       </sc-if>
       <sc-if value="{{ recentChatOpen }}" hint-placeholder-val="{{ false }}">
-        <div style="position:fixed;bottom:32px;right:32px;width:380px;height:560px;background:#fff;border-radius:12px 12px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,0.15);z-index:100;overflow:hidden;display:flex;flex-direction:column">
+        <div data-print-hide style="position:fixed;bottom:32px;right:32px;width:380px;height:560px;background:#fff;border-radius:12px 12px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,0.15);z-index:100;overflow:hidden;display:flex;flex-direction:column">
           <dc-import name="LabGenieChat" chips="{{ recentChips }}" greeting="{{ recentGreeting }}" hint="{{ recentHint }}" closeable="{{ true }}" on-close="{{ closeRecentChat }}" hint-size="100%,100%"></dc-import>
         </div>
       </sc-if>
@@ -526,9 +509,9 @@
 
     <!-- ========== PAST RESULTS ========== -->
     <sc-if value="{{ isPast }}" hint-placeholder-val="{{ false }}">
-      <div style="height:100%;overflow-y:auto;position:relative">
-        {{ bgDecoEl }}
-        <div style="position:relative;z-index:1;padding:24px 48px 80px;max-width:920px;margin:0 auto">
+      <div data-print-scroll style="height:100%;overflow-y:auto;position:relative">
+        <div data-print-hide style="display:contents">{{ bgDecoEl }}</div>
+        <div data-print-pad style="position:relative;z-index:1;padding:24px 48px 80px;max-width:920px;margin:0 auto">
 
           <!-- LIST VIEW -->
           <sc-if value="{{ pastListView }}" hint-placeholder-val="{{ true }}">
@@ -537,9 +520,9 @@
                 <p style="font-family:Figtree,sans-serif;font-size:32px;font-weight:700;color:#25282a;margin:0">Past Results</p>
                 <p style="margin:8px 0 0;font-size:16px;font-weight:500;color:#6b7280">Your lab visits, most recent first. Select a visit to see its results.</p>
               </div>
-              <button onClick="{{ printPage }}" style="flex-shrink:0;display:flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1.5px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-size:15px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                Print
+              <button data-print-hide onClick="{{ printPage }}" aria-label="Print results" style="flex-shrink:0;display:flex;align-items:center;gap:10px;min-height:48px;padding:12px 20px;border-radius:10px;border:2px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-family:Inter,sans-serif;font-size:16px;font-weight:700;color:var(--accent,#016ab3);white-space:nowrap" style-hover="background:#F0F7FA" style-focus="outline:3px solid #9CCBEB;outline-offset:2px">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                Print results
               </button>
             </div>
 
@@ -566,7 +549,7 @@
 
           <!-- DETAIL VIEW -->
           <sc-if value="{{ pastDetailView }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ closeVisit }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;padding:0;margin-bottom:20px;cursor:pointer;font-size:15px;font-weight:700;color:var(--accent,#016ab3)" style-hover="opacity:0.7">
+            <button data-print-hide onClick="{{ closeVisit }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;padding:0;margin-bottom:20px;cursor:pointer;font-size:15px;font-weight:700;color:var(--accent,#016ab3)" style-hover="opacity:0.7">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
               All visits
             </button>
@@ -577,9 +560,9 @@
                 <p style="margin:8px 0 0;font-size:16px;font-weight:500;color:#6b7280">Ordered by {{ activeVisit.doctor }} · {{ activeVisit.specialty }}</p>
                 <span style="display:inline-flex;align-items:center;margin-top:14px;padding:8px 14px;border-radius:9999px;font-size:14px;font-weight:700;background:{{ activeVisit.badgeBg }};color:{{ activeVisit.badgeColor }};border:1px solid {{ activeVisit.badgeBorder }}">{{ activeVisit.badgeText }}</span>
               </div>
-              <button onClick="{{ printPage }}" style="flex-shrink:0;display:flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1.5px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-size:15px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#F0F7FA">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                Print
+              <button data-print-hide onClick="{{ printPage }}" aria-label="Print results" style="flex-shrink:0;display:flex;align-items:center;gap:10px;min-height:48px;padding:12px 20px;border-radius:10px;border:2px solid var(--accent,#016ab3);background:#fff;cursor:pointer;font-family:Inter,sans-serif;font-size:16px;font-weight:700;color:var(--accent,#016ab3);white-space:nowrap" style-hover="background:#F0F7FA" style-focus="outline:3px solid #9CCBEB;outline-offset:2px">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="var(--accent,#016ab3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                Print results
               </button>
             </div>
 

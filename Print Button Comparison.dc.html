@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@700;800&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+<style>html,body{margin:0;padding:0;background:#F4F7FB}*{box-sizing:border-box}a{color:#016ab3}a:hover{color:#0D4EA2}</style>
+</helmet>
+<div style="font-family:Inter,sans-serif;padding:40px;display:flex;flex-direction:column;gap:24px">
+  <div>
+    <p style="margin:0;font-family:Figtree,sans-serif;font-size:24px;font-weight:800;color:#25282a">Print button — Recent vs. Past Results</p>
+    <p style="margin:8px 0 0;font-size:16px;font-weight:500;color:#4B5563">Same position (top-right of the content header), same component: printer icon + “Print results”, 48px tall, 16px bold label, 2px blue outline.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:24px;align-items:start">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="align-self:flex-start;padding:4px 10px;border-radius:6px;background:#25282a;color:#fff;font-size:13px;font-weight:700">Recent Results</span>
+      <div style="background:#fff;border-radius:20px;border:1px solid #dae0ee;padding:32px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px">
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+              <p style="margin:0;font-family:Figtree,sans-serif;font-size:30px;font-weight:700;color:#25282a">Latest results (Sept. 14, 2025)</p>
+              <div style="display:flex;gap:12px">
+                <div style="background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">3 Panels</span></div>
+                <div style="background:#dfd6b2;height:32px;padding:8px 12px;border-radius:28px;display:flex;align-items:center"><span style="font-size:14px;font-weight:500;color:#25282a">10 Tests</span></div>
+              </div>
+            </div>
+            <div style="display:flex;gap:20px;align-items:center;margin-top:16px;flex-wrap:wrap">
+              <span style="font-size:16px;font-weight:500;color:#ed4646">7 Tests outside standard range</span>
+              <span style="font-size:16px;font-weight:500;color:#28bd4b">3 Tests within standard range</span>
+            </div>
+          </div>
+          <button style="flex-shrink:0;display:flex;align-items:center;gap:10px;min-height:48px;padding:12px 20px;border-radius:10px;border:2px solid #016ab3;background:#fff;cursor:pointer;font-family:Inter,sans-serif;font-size:16px;font-weight:700;color:#016ab3;white-space:nowrap;outline:2px dashed #ED4646;outline-offset:6px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="#016ab3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Print results
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="align-self:flex-start;padding:4px 10px;border-radius:6px;background:#25282a;color:#fff;font-size:13px;font-weight:700">Past Results</span>
+      <div style="background:#fff;border-radius:20px;border:1px solid #dae0ee;padding:32px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px">
+          <div style="flex:1;min-width:0">
+            <p style="margin:0;font-family:Figtree,sans-serif;font-size:30px;font-weight:700;color:#25282a">Past Results</p>
+            <p style="margin:8px 0 0;font-size:16px;font-weight:500;color:#6b7280">Your lab visits, most recent first. Select a visit to see its results.</p>
+          </div>
+          <button style="flex-shrink:0;display:flex;align-items:center;gap:10px;min-height:48px;padding:12px 20px;border-radius:10px;border:2px solid #016ab3;background:#fff;cursor:pointer;font-family:Inter,sans-serif;font-size:16px;font-weight:700;color:#016ab3;white-space:nowrap;outline:2px dashed #ED4646;outline-offset:6px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6v-7z" stroke="#016ab3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Print results
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p style="margin:0;font-size:14px;font-weight:500;color:#4B5563">Dashed red outline marks the button for comparison only — it isn’t part of the design.</p>
+</div>
+</x-dc>
+</body>
+</html>
