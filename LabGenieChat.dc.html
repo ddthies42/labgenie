@@ -11,8 +11,8 @@
   <!-- Header -->
   <div style="flex-shrink:0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #DAE0EE;min-height:56px">
     <div style="display:flex;align-items:center;gap:8px">
-      <div style="display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0;width:28px;height:28px;background:var(--accent,#016ab3)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 2H5C3.9 2 3 2.9 3 4V18C3 19.1 3.9 20 5 20H9L11.29 22.29C11.68 22.68 12.31 22.68 12.7 22.29L15 20H19C20.1 20 21 19.1 21 18V4C21 2.9 20.1 2 19 2ZM13.88 12.88L12 17L10.12 12.88L6 11L10.12 9.12L12 5L13.88 9.12L18 11L13.88 12.88Z" fill="white"></path></svg>
+      <div style="display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;width:36px;height:36px;background:#EBF5FA;border:1.5px solid #B8DBF0">
+        <img src="logo-icon.png" alt="" width="26" height="26" style="display:block;width:26px;height:26px;object-fit:contain">
       </div>
       <span style="font-size:18px;font-weight:700;color:#25282A">Ask LabGenie</span>
     </div>
@@ -57,8 +57,9 @@
           <sc-for list="{{ questionRows }}" as="q" hint-placeholder-count="3">
             <div style="{{ q.rowStyle }}" style-hover="{{ q.rowHover }}">
               <span style="flex:1;font-size:15px;font-weight:500;color:#25282A;line-height:22px">{{ q.text }}</span>
-              <button onClick="{{ q.toggle }}" style="background:none;border:none;cursor:pointer;flex-shrink:0;display:flex" style-hover="opacity:0.7">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="{{ q.bmFill }}" stroke="var(--accent,#016ab3)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+              <button onClick="{{ q.toggle }}" style="display:flex;align-items:center;gap:6px;min-height:44px;padding:8px 12px;border-radius:10px;background:#F0F7FA;border:none;cursor:pointer;flex-shrink:0;font-family:Inter,sans-serif;font-size:15px;font-weight:700;color:var(--accent,#016ab3)" style-hover="background:#DCEEF8">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="{{ q.bmFill }}" stroke="var(--accent,#016ab3)" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                <span>{{ q.saveLabel }}</span>
               </button>
             </div>
           </sc-for>
@@ -124,7 +125,7 @@ class Component extends DCLogic {
       activeResponse: activeChip ? activeChip.response : '',
       modeChip: mode === 'chip' && !(activeChip && activeChip.kind === 'questions'),
       modeQuestions: mode === 'chip' && !!activeChip && activeChip.kind === 'questions',
-      questionRows: this.props.questions || [],
+      questionRows: (this.props.questions || []).map((q) => ({ ...q, saveLabel: q.saved ? 'Saved' : 'Save' })),
       savedAny: savedQCount > 0,
       savedLabel: savedQCount === 1 ? '1 question saved to your prep list' : savedQCount + ' questions saved to your prep list',
       onViewPrep: this.props.onViewPrep,
