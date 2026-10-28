@@ -19,7 +19,11 @@ root), the prototype is served at the Pages URL directly.
 2. **Dashboard** — summary of recent lab results, flagged values, and next steps.
 3. **Recent / Past results** — detail views, including result ranges over time.
 4. **LabGenie chat** — the assistant panel, reachable from the results views.
-   Responses are scripted, not live.
+   Responses are scripted, not live. Topics are picked from suggested
+   questions; there is no free-text input. On Recent Results the chat can be
+   read aloud using the browser's built-in speech.
+5. **Print** — Recent and Past Results each have a **Print results** button
+   that opens the browser's print dialog (choose "Save as PDF" to keep a copy).
 
 ## What's in here
 
@@ -31,6 +35,9 @@ root), the prototype is served at the Pages URL directly.
 | `RangeBar.dc.html` | Source for the result-range indicator component. |
 | `support.js` | Runtime the source files load. |
 | `logo-icon.png` | LabGenie mark. |
+| `labgenie-mascot.svg` | Full LabGenie mascot, used on the Ask LabGenie launcher. |
+| `labgenie-mascot-peek-v2.svg` | Mascot head that peeks over the open chat card. |
+| `Print Button Comparison.dc.html` | Side-by-side of the Recent and Past Results print buttons. Reference only. |
 | `uploads/` | Reference React/TypeScript codebase the prototype was modelled on. Not used to build or run the prototype. |
 | `.gitignore` | Excludes build output — notably `.bundles/`, a bundler cache directory that should never be committed. |
 

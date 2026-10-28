@@ -8,29 +8,57 @@
 <body>
 <x-dc>
 <div style="display:flex;flex-direction:column;height:100%;background:#fff;font-family:Inter,sans-serif">
-  <!-- Header -->
+  <sc-if value="{{ isPopup }}" hint-placeholder-val="{{ false }}">
+    <div style="flex-shrink:0;padding:18px 12px 6px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <span style="font-size:20px;font-weight:700;color:#25282A;white-space:nowrap">Ask LabGenie</span>
+      <button onClick="{{ onClose }}" aria-label="Close chat" title="Close chat" style="flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;border-radius:10px;color:#25282A" style-hover="background:#F0F7FA" style-focus="outline:3px solid #9CCBEB;outline-offset:2px">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ notPopup }}" hint-placeholder-val="{{ true }}">
   <div style="flex-shrink:0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #DAE0EE;min-height:56px">
     <div style="display:flex;align-items:center;gap:8px">
       <div style="display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;width:36px;height:36px;background:#EBF5FA;border:1.5px solid #B8DBF0">
         <img src="logo-icon.png" alt="" width="26" height="26" style="display:block;width:26px;height:26px;object-fit:contain">
       </div>
-      <span style="font-size:18px;font-weight:700;color:#25282A">Ask LabGenie</span>
+      <span style="font-size:18px;font-weight:700;color:#25282A;white-space:nowrap">Ask LabGenie</span>
     </div>
-    <sc-if value="{{ showChooseAnother }}" hint-placeholder-val="{{ true }}">
-      <button onClick="{{ chooseAnother }}" style="background:none;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:8px;font-family:Inter,sans-serif;font-size:13px;font-weight:500;color:var(--accent,#016ab3)" style-hover="opacity:0.7">Choose another topic →</button>
+    <sc-if value="{{ showChooseInHeader }}" hint-placeholder-val="{{ true }}">
+      <button onClick="{{ chooseAnother }}" style="background:none;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:auto;font-family:Inter,sans-serif;font-size:13px;font-weight:500;color:var(--accent,#016ab3)" style-hover="opacity:0.7">Choose another topic →</button>
     </sc-if>
     <sc-if value="{{ showClose }}" hint-placeholder-val="{{ false }}">
-      <button onClick="{{ onClose }}" style="background:none;border:none;cursor:pointer;padding:4px;border-radius:6px;color:#25282A" style-hover="background:#f3f4f6">
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      <button onClick="{{ onClose }}" aria-label="Close chat" title="Close chat" style="flex-shrink:0;margin-left:8px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid #C7D9EC;cursor:pointer;border-radius:10px;color:#25282A" style-hover="background:#F0F7FA;border-color:var(--accent,#016ab3)" style-focus="outline:3px solid #9CCBEB;outline-offset:2px">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
     </sc-if>
   </div>
+  </sc-if>
+  <sc-if value="{{ showChooseBelow }}" hint-placeholder-val="{{ false }}">
+    <div style="flex-shrink:0;padding:0 24px">
+      <button onClick="{{ chooseAnother }}" style="display:flex;align-items:center;gap:6px;min-height:44px;background:none;border:none;padding:0;cursor:pointer;font-family:Inter,sans-serif;font-size:15px;font-weight:600;color:var(--accent,#016ab3)" style-hover="opacity:0.7">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        Choose another topic
+      </button>
+    </div>
+  </sc-if>
 
   <!-- Content -->
-  <div style="flex:1;overflow-y:auto;padding:20px 16px;min-height:0">
+  <div data-chat-content style="flex:1;overflow-y:auto;padding:{{ contentPad }};min-height:0">
 
     <!-- DEFAULT -->
-    <sc-if value="{{ isDefault }}" hint-placeholder-val="{{ true }}">
+    <sc-if value="{{ isPopupDefault }}" hint-placeholder-val="{{ false }}">
+      <div style="border-radius:16px;padding:16px 18px;margin-bottom:16px;background:#EEF2F7">
+        <p style="margin:0;font-size:17px;font-weight:500;color:#25282A;line-height:26px">{{ greeting }}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <sc-for list="{{ chipButtons }}" as="chip" hint-placeholder-count="3">
+          <button onClick="{{ chip.onClick }}" style="width:100%;text-align:left;border-radius:14px;padding:16px 18px;background:#fff;border:1.5px solid #DAE0EE;cursor:pointer;font-family:Inter,sans-serif;font-size:17px;font-weight:500;color:#25282A;line-height:26px" style-hover="background:#F0F7FA;border-color:#B8DBF0" style-focus="outline:3px solid #9CCBEB;outline-offset:2px">{{ chip.text }}</button>
+        </sc-for>
+      </div>
+      <p style="margin:14px 0 0;font-size:15px;font-weight:500;color:#6B7280;line-height:22px">{{ hint }}</p>
+    </sc-if>
+    <sc-if value="{{ isPanelDefault }}" hint-placeholder-val="{{ true }}">
       <div style="border-radius:12px;padding:16px;margin-bottom:20px;background:#F2F5F8">
         <p style="font-size:15px;font-weight:500;color:#1A1A1A;line-height:22px">{{ greeting }}</p>
       </div>
@@ -115,9 +143,16 @@ class Component extends DCLogic {
       greeting: this.props.greeting || "Hi, Sam. I'm LabGenie, your lab results companion. How can I help you today?",
       hint: this.props.hint || 'Select a topic above to learn more about your results.',
       isDefault,
+      isPopup: !!this.props.closeable,
+      notPopup: !this.props.closeable,
+      isPopupDefault: isDefault && !!this.props.closeable,
+      isPanelDefault: isDefault && !this.props.closeable,
+      contentPad: this.props.closeable ? '12px 24px 24px' : '20px 16px',
       notDefault: !isDefault,
-      showClose: isDefault && !!this.props.closeable,
+      showClose: !!this.props.closeable,
       showChooseAnother: !isDefault,
+      showChooseInHeader: !isDefault && !this.props.closeable,
+      showChooseBelow: !isDefault && !!this.props.closeable,
       chipButtons: isDefault
         ? chips.map((c, i) => ({ text: c.text, onClick: () => this.setState({ mode: 'chip', chipIdx: i }) }))
         : [],
